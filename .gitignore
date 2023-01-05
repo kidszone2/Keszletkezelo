@@ -76,6 +76,8 @@ appsettings.Development.json
 /.work/
 **/logs.fail/
 **/log/nav-request/
+*_Install.zip
+*_Source.zip
 
 #
 #   Excludes:
