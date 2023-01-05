@@ -31,7 +31,7 @@ namespace RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointnent.Servi
                 return false;
 
             return currentUser.IsAdmin
-                || currentUser.UserID == booking.CreatedByUserID);
+                || currentUser.UserID == booking.CreatedByUserID;
         }
 
         private void AssertAccess(TestFlightBooking booking)
