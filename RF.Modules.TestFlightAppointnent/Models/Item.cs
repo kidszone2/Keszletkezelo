@@ -15,9 +15,12 @@ using DotNetNuke.ComponentModel.DataAnnotations;
 using DotNetNuke.Entities.Content;
 using System;
 using System.Web.Caching;
+using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointnent.Models
 {
+
     [TableName("RF.Modules.TestFlightAppointnent_Items")]
     //setup the primary key for table
     [PrimaryKey("ItemId", AutoIncrement = true)]
