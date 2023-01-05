@@ -70,6 +70,16 @@ ALTER TABLE {databaseOwner}{objectQualifier}TestFlightParticipants WITH NOCHECK 
     ON DELETE CASCADE
 GO
 
+INSERT INTO [TestFlightPlans] (
+	[Name], [Duration], [IsPublic], [Description]
+	) VALUES
+	('Sol Tour', 2, 1, ''),
+	('Near Space Tour', 2, 1, ''),
+	('Deep Space Tour', 5, 1, ''),
+	('Maintnance', 2, 0, ''),
+	('All Day VIP Tour', 23, 0, '');
+GO
+
 
 /************************************************************/
 /*****              SqlDataProvider                     *****/
