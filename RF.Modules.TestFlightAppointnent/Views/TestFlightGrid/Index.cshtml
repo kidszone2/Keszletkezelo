@@ -1,0 +1,45 @@
+﻿.
+@{
+    var startDay = DateTime.Today
+        .AddDays(-(int)DateTime.Today.DayOfWeek + 1);
+    var utcNow = DateTime.Now.ToUniversalTime();
+}
+
+<h2>BookingGrid</h2>
+
+<table style="width: 100%">
+    <thead>
+        <tr>
+            <th></th>
+            @for (var i = 0; i < 7; i++)
+            {
+                <th>@startDay.AddDays(i).ToString("dddd")</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < 8; i++)
+        {
+            var startTime = startDay.ToUniversalTime().Date;
+
+            <tr>
+                <th>
+                    LOCAL: @startTime.AddHours(i * 3).ToLocalTime().ToString("HH:mm")<br />
+                    (UTC: @startTime.AddHours(i * 3).ToString("HH:mm"))
+                </th>
+                @for (var d = 0; d < 7; d++)
+                {
+                    var cellTime = startTime.AddDays(d).AddHours(i * 3);
+                    var isPast = cellTime < utcNow;
+                    var isLocked = cellTime < utcNow.AddHours(12);
+                    var cellColor = isPast || isLocked ? "gray" : "green";
+
+                    <td style="background-color: @cellColor">
+                    </td>
+
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -86,6 +86,42 @@
             </moduleDefinitions>
           </desktopModule>
         </component>
+          <component type="Module">
+              <desktopModule>
+                  <moduleName>RF.Modules.TestFlightAppointnent</moduleName>
+                  <foldername>RF.Modules.TestFlightAppointnent</foldername>
+                  <businessControllerClass>RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointnent.Components.FeatureController</businessControllerClass>
+                  <supportedFeatures />
+                  <moduleDefinitions>
+                      <moduleDefinition>
+                          <friendlyName>Test Flight Booking Grid</friendlyName>
+                          <defaultCacheTime>0</defaultCacheTime>
+                          <moduleControls>
+                              <moduleControl>
+                                  <controlKey />
+                                  <controlSrc>RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointnent.Controllers/TestFlightGrid/Index.mvc</controlSrc>
+                                  <supportsPartialRendering>False</supportsPartialRendering>
+                                  <controlTitle />
+                                  <controlType>View</controlType>
+                                  <iconFile />
+                                  <helpUrl />
+                                  <viewOrder>0</viewOrder>
+                              </moduleControl>
+                              <moduleControl>
+                                  <controlKey>Settings</controlKey>
+                                  <controlSrc>RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointnent.Controllers/Settings/Settings.mvc</controlSrc>
+                                  <supportsPartialRendering>False</supportsPartialRendering>
+                                  <controlTitle>RF.Modules.TestFlightAppointnent Settings</controlTitle>
+                                  <controlType>Edit</controlType>
+                                  <iconFile />
+                                  <helpUrl />
+                                  <viewOrder>0</viewOrder>
+                              </moduleControl>
+                          </moduleControls>
+                      </moduleDefinition>
+                  </moduleDefinitions>
+              </desktopModule>
+          </component>
         <component type="Assembly">
           <assemblies>
             <assembly>
