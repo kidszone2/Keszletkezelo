@@ -1,0 +1,62 @@
+﻿.
+@{
+    var utcNow = DateTime.UtcNow;
+    var startDay = utcNow
+        .AddDays(-(int)utcNow.DayOfWeek + 1)
+        .Date;
+    var localNow = DateTime.Now;
+}
+
+<h2>BookingGrid</h2>
+<p>
+    Please remember, the dates in the grid are in UTC time as our flight operations
+    uses UTC time.
+</p>
+<table class="tf-booking-grid">
+    <thead>
+        <tr>
+            <th></th>
+            @for (var i = 0; i < 7; i++)
+            {
+                var day = startDay.AddDays(i);
+                <th>
+                    @day.ToString("dddd")<br/>
+                    (@day.ToShortDateString())
+            </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < 8; i++)
+        {
+            var offset = TimeSpan.FromHours(i * 3);
+            var time = utcNow.Date + offset;
+
+            <tr>
+                <th>
+                    LOCAL: @time.ToLocalTime().ToString("HH:mm")<br />
+                    (UTC: @time.ToString("HH:mm"))
+                </th>
+                @for (var d = 0; d < 7; d++)
+                {
+                    var cellDay = startDay.AddDays(d);
+                    var cellTime = cellDay.AddHours(i * 3);
+                    var isPast = cellTime < utcNow;
+                    var isLocked = cellTime < utcNow.AddHours(12);
+                    var cellColor = isPast || isLocked ? "gray" : "green";
+
+                    <td style="background-color: @cellColor">
+                        @cellTime.ToLocalTime()<br/>
+                        @cellTime
+                    </td>
+
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript" src="/DesktopModules/MVC/RF.Modules.TestFlightAppointment/BookingGrid.js">
+
+</script>
+

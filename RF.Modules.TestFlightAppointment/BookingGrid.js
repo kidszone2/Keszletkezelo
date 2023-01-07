@@ -1,0 +1,3 @@
+function tfBookingGridHelloWorld() {
+    alert("hw");
+}
