@@ -47,12 +47,12 @@
 						<supportedFeatures />
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RF.Modules.TestFlightAppointment</friendlyName>
+								<friendlyName>Test Flight Booking Grid</friendlyName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
 										<controlKey />
-										<controlSrc>RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Controllers/Item/Index.mvc</controlSrc>
+										<controlSrc>RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Controllers/TestFlightGrid/Index.mvc</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
 										<controlType>View</controlType>
@@ -60,7 +60,7 @@
 										<helpUrl />
 										<viewOrder>0</viewOrder>
 									</moduleControl>
-									<moduleControl>
+									<!--<moduleControl>
 										<controlKey>Edit</controlKey>
 										<controlSrc>RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Controllers/Item/Edit.mvc</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
@@ -70,7 +70,7 @@
 										<helpUrl />
 										<viewOrder>0</viewOrder>
 										<supportsPopUps>True</supportsPopUps>
-									</moduleControl>
+									</moduleControl>-->
 									<moduleControl>
 										<controlKey>Settings</controlKey>
 										<controlSrc>RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Controllers/Settings/Settings.mvc</controlSrc>

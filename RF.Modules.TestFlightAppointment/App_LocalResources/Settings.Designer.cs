@@ -39,7 +39,7 @@ namespace RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.App_L
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointnent.App_LocalResourc" +
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.App_LocalResourc" +
                             "es.Settings", typeof(Settings).Assembly);
                     resourceMan = temp;
                 }
