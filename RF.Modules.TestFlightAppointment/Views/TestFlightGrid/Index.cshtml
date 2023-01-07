@@ -1,5 +1,11 @@
-﻿
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage
+
+@using DotNetNuke.Web.Client.ClientResourceManagement
+@using DotNetNuke.Framework.JavaScriptLibraries
+
 @{
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/DesktopModules/MVC/RF.Modules.TestFlightAppointment/Scripts/BookingGrid.js");
+
     var utcNow = DateTime.UtcNow;
     var startDay = utcNow
         .AddDays(-(int)utcNow.DayOfWeek + 1)
@@ -7,7 +13,6 @@
     var localNow = DateTime.Now;
 }
 
-<h2>BookingGrid</h2>
 <p>
     Please remember, the dates in the grid are in UTC time as our flight operations
     uses UTC time.
