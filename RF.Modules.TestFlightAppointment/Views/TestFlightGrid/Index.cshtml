@@ -15,7 +15,7 @@
 
 <p>
     Please remember, the dates in the grid are in UTC time as our flight operations
-    uses UTC time.
+    uses UTC time. CHHARGE
 </p>
 <table class="tf-booking-grid">
     <thead>
@@ -61,6 +61,14 @@
     </tbody>
 </table>
 
+<script type="text/javascript">
+    /*globals jQuery, window, Sys */
+    (function($, Sys) {
+        var sf = $.ServicesFramework('@Dnn.ActiveModule.ModuleID');
+        var serviceUrl = sf.getServiceRoot('TestFlightAppointmentApi');
 
+        console.log("!!! WRN !!!" + @Dnn.ActiveModule.ModuleID);
+        console.log("!!! WRN !!!" + serviceUrl);
+
+    }(jQuery, window.Sys));
 </script>
-
