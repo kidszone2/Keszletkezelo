@@ -3,6 +3,7 @@ using DotNetNuke.Data;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
 using DotNetNuke.UI.UserControls;
+using DotNetNuke.Web.Api;
 using RF.Modules.TestFlightAppointment.Models;
 using System;
 using System.Linq;
@@ -10,11 +11,14 @@ using System.Xml.Linq;
 
 namespace RF.Modules.TestFlightAppointment.Services.Implementations
 {
-    internal class TestFlightBookingManager : ServiceLocator<ITestFlightBookingManager, TestFlightBookingManager>, ITestFlightBookingManager
+    internal class TestFlightBookingManager : ITestFlightBookingManager
     {
-        public TestFlightBookingManager() { }
+        public TestFlightBookingManager()
+            : this(DotNetNuke.Entities.Users.UserController.Instance)
+        { }
 
-        internal TestFlightBookingManager(
+
+        public TestFlightBookingManager(
             IUserController userController
             )
         {
@@ -154,7 +158,7 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
         public bool IsSlotAvailable(DateTime from, int duration)
         {
             using (var ctx = DataContext.Instance())
-            {                
+            {
                 var to = from.AddHours(duration);
 
                 var results = ctx.GetRepository<TestFlightBooking>()
@@ -169,9 +173,5 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
             }
         }
 
-        protected override Func<ITestFlightBookingManager> GetFactory()
-            => () => new TestFlightBookingManager(
-                DotNetNuke.Entities.Users.UserController.Instance
-                );
     }
 }

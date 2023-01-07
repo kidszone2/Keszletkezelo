@@ -1,6 +1,5 @@
 ﻿using DotNetNuke.Web.Api;
-using Newtonsoft.Json;
-using System.Diagnostics;
+using System;
 using System.Net;
 using System.Net.Http;
 
@@ -13,9 +12,6 @@ namespace RF.Modules.TestFlightAppointment.Controllers.Api
 
         protected HttpResponseMessage Json(HttpStatusCode status, object data)
         {
-            // Debugger.Launch();
-
-            // var json = JsonConvert.SerializeObject(data); 
             var response = Request.CreateResponse(
                 status,
                 data,
@@ -26,5 +22,12 @@ namespace RF.Modules.TestFlightAppointment.Controllers.Api
 
         protected HttpResponseMessage Json(int status, object data)
             => Json((HttpStatusCode)status, data);
+
+        protected HttpResponseMessage JsonException(Exception ex)
+            => Json(
+                HttpStatusCode.InternalServerError, new
+                {
+                    error = ex.Message
+                });
     }
 }

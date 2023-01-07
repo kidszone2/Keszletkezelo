@@ -8,7 +8,7 @@ namespace RF.Modules.TestFlightAppointment.Components
         public void RegisterRoutes(IMapRoute mapRouteManager)
         {
             mapRouteManager.MapHttpRoute(
-                "TestFlightAppointment",
+                "TestFlightBooking",
                 "default",
                 "{controller}/{action}",
                 new string[] { "RF.Modules.TestFlightAppointment.Controllers.Api" });
