@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Models
+namespace RF.Modules.TestFlightAppointment.Models
 {
     public class Settings
     {

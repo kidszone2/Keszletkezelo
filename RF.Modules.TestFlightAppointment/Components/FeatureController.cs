@@ -15,7 +15,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Search;
 using System.Collections.Generic;
 
-namespace RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Components
+namespace RF.Modules.TestFlightAppointment.Components
 {
     /// -----------------------------------------------------------------------------
     /// <summary>

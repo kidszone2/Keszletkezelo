@@ -1,7 +1,7 @@
-﻿using RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Models;
+﻿using RF.Modules.TestFlightAppointment.Models;
 using System;
 
-namespace RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Services
+namespace RF.Modules.TestFlightAppointment.Services
 {
     public class BookingData
     {

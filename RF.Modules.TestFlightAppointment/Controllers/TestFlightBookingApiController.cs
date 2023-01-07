@@ -1,9 +1,9 @@
 ﻿using DotNetNuke.Web.Mvc.Framework.ActionFilters;
 using DotNetNuke.Web.Mvc.Framework.Controllers;
-using RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Services.Implementations;
+using RF.Modules.TestFlightAppointment.Services.Implementations;
 using System.Web.Mvc;
 
-namespace RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Controllers
+namespace RF.Modules.TestFlightAppointment.Controllers
 {
     
     public class TestFlightBookingApiController : DnnController

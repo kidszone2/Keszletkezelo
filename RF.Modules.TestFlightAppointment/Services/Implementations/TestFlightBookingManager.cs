@@ -3,12 +3,12 @@ using DotNetNuke.Data;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
 using DotNetNuke.UI.UserControls;
-using RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Models;
+using RF.Modules.TestFlightAppointment.Models;
 using System;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Services.Implementations
+namespace RF.Modules.TestFlightAppointment.Services.Implementations
 {
     internal class TestFlightBookingManager : ServiceLocator<ITestFlightBookingManager, TestFlightBookingManager>, ITestFlightBookingManager
     {

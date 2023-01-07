@@ -1,4 +1,6 @@
-﻿.
+﻿@using System
+@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage
+
 @{
     var utcNow = DateTime.UtcNow;
     var startDay = utcNow
@@ -20,9 +22,9 @@
             {
                 var day = startDay.AddDays(i);
                 <th>
-                    @day.ToString("dddd")<br/>
+                    @day.ToString("dddd")<br />
                     (@day.ToShortDateString())
-            </th>
+                </th>
             }
         </tr>
     </thead>
@@ -46,7 +48,7 @@
                     var cellColor = isPast || isLocked ? "gray" : "green";
 
                     <td style="background-color: @cellColor">
-                        @cellTime.ToLocalTime()<br/>
+                        @cellTime.ToLocalTime()<br />
                         @cellTime
                     </td>
 

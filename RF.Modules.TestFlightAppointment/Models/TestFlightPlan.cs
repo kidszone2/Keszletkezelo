@@ -13,7 +13,7 @@
 using DotNetNuke.ComponentModel.DataAnnotations;
 using System.Web.Caching;
 
-namespace RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Models
+namespace RF.Modules.TestFlightAppointment.Models
 {
     [TableName("TestFlightPlans")]
     [PrimaryKey(nameof(FlightPlanID), AutoIncrement = true)]

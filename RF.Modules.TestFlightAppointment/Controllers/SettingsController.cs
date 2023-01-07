@@ -16,7 +16,7 @@ using DotNetNuke.Web.Mvc.Framework.ActionFilters;
 using DotNetNuke.Web.Mvc.Framework.Controllers;
 using System.Web.Mvc;
 
-namespace RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Controllers
+namespace RF.Modules.TestFlightAppointment.Controllers
 {
     [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
     [DnnHandleError]

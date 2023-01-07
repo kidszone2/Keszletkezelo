@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Services.Implementations
+namespace RF.Modules.TestFlightAppointment.Services.Implementations
 {
     [Serializable]
     internal class TestFlightException : Exception

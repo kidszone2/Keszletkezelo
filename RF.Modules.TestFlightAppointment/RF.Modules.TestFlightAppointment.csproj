@@ -121,7 +121,7 @@
     <Content Include="Documentation\Documentation.css" />
     <Content Include="Documentation\Documentation.html" />
     <Content Include="License.txt" />
-    <Content Include="BookingGrid.js" />
+    <Content Include="Scripts\BookingGrid.js" />
     <Content Include="module.css" />
     <Content Include="ReleaseNotes.txt" />
   </ItemGroup>
@@ -156,8 +156,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Item\Index.cshtml" />
-    <Content Include="Views\Item\Edit.cshtml" />
     <Content Include="Views\Settings\Settings.cshtml" />
     <Content Include="Views\TestFlightGrid\Index.cshtml" />
     <None Include="Web.Debug.config">

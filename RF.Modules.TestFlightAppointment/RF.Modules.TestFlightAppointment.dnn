@@ -1,8 +1,8 @@
 <dotnetnuke type="Package" version="5.0">
 	<packages>
 		<package name="RF.Modules.TestFlightAppointment" type="Module" version="00.00.02">
-			<friendlyName>RF.Modules.TestFlightAppointment</friendlyName>
-			<description>RF.Modules.TestFlightAppointment</description>
+			<friendlyName>Test Flight Appointment</friendlyName>
+			<description>This module adds complete capability for managing test flight appointments.</description>
 			<iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
 			<owner>
 				<name>BCE</name>
@@ -41,9 +41,9 @@
 				</component>
 				<component type="Module">
 					<desktopModule>
-						<moduleName>RF.Modules.TestFlightAppointment</moduleName>
+						<moduleName>Test Flight Appointment</moduleName>
 						<foldername>RF.Modules.TestFlightAppointment</foldername>
-						<businessControllerClass>RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Components.FeatureController</businessControllerClass>
+						<businessControllerClass>RF.Modules.TestFlightAppointment.Components.FeatureController</businessControllerClass>
 						<supportedFeatures />
 						<moduleDefinitions>
 							<moduleDefinition>
@@ -52,7 +52,7 @@
 								<moduleControls>
 									<moduleControl>
 										<controlKey />
-										<controlSrc>RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Controllers/TestFlightGrid/Index.mvc</controlSrc>
+										<controlSrc>RF.Modules.TestFlightAppointment.Controllers/TestFlightGrid/Index.mvc</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
 										<controlType>View</controlType>
@@ -60,20 +60,9 @@
 										<helpUrl />
 										<viewOrder>0</viewOrder>
 									</moduleControl>
-									<!--<moduleControl>
-										<controlKey>Edit</controlKey>
-										<controlSrc>RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Controllers/Item/Edit.mvc</controlSrc>
-										<supportsPartialRendering>False</supportsPartialRendering>
-										<controlTitle>Edit Content</controlTitle>
-										<controlType>Edit</controlType>
-										<iconFile />
-										<helpUrl />
-										<viewOrder>0</viewOrder>
-										<supportsPopUps>True</supportsPopUps>
-									</moduleControl>-->
 									<moduleControl>
 										<controlKey>Settings</controlKey>
-										<controlSrc>RF.Modules.TestFlightAppointmentRF.Modules.TestFlightAppointment.Controllers/Settings/Settings.mvc</controlSrc>
+										<controlSrc>RF.Modules.TestFlightAppointment.Controllers/Settings/Settings.mvc</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle>RF.Modules.TestFlightAppointment Settings</controlTitle>
 										<controlType>Edit</controlType>
