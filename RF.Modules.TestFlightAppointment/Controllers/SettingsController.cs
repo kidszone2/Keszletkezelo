@@ -32,7 +32,7 @@ namespace RF.Modules.TestFlightAppointment.Controllers
             var settings = new Models.Settings();
             settings.Setting1 = ModuleContext.Configuration.ModuleSettings.GetValueOrDefault("RF.Modules.TestFlightAppointment_Setting1", false);
             settings.Setting2 = ModuleContext.Configuration.ModuleSettings.GetValueOrDefault("RF.Modules.TestFlightAppointment_Setting2", System.DateTime.Now);
-
+           
             return View(settings);
         }
 
