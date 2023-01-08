@@ -25,7 +25,13 @@ namespace RF.Modules.TestFlightAppointment.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View("Index");
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return PartialView("Create");
         }
     }
 }

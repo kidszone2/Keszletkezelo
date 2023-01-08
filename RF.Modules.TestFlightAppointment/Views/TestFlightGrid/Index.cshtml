@@ -15,7 +15,15 @@
 
 <p>
     Please remember, the dates in the grid are in UTC time as our flight operations
-    uses UTC time. CHHARGE
+    uses UTC time.
+
+    <a href="@Url.Action("Create", "TestFlightGrid", new {ctl = "Create" })">Create booking</a>
+
+    <br />
+
+    @Url.Action("Create", "TestFlightGrid")<br />
+    @Url.Action("Create", "TestFlightGrid", new { ctl = "Create" })
+
 </p>
 <table class="tf-booking-grid">
     <thead>
@@ -65,7 +73,8 @@
     /*globals jQuery, window, Sys */
     (function($, Sys) {
         var sf = $.ServicesFramework('@Dnn.ActiveModule.ModuleID');
-        var serviceUrl = sf.getServiceRoot('TestFlightAppointmentApi');
+        // var serviceUrl = sf.getServiceRoot('TestFlightAppointmentApi');
+        var serviceUrl = sf.getServiceRoot('TestFlightBooking');
 
         console.log("!!! WRN !!!" + @Dnn.ActiveModule.ModuleID);
         console.log("!!! WRN !!!" + serviceUrl);

@@ -1,0 +1,36 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<RF.Modules.TestFlightAppointment.Models.CreateBookingParameters>
+
+<h1>Create a booking</h1>
+
+@using System.Collections.Generic
+@using DotNetNuke.Web.Mvc.Helpers
+
+<div id="Item-@Dnn.ModuleContext.ModuleId">
+    <div class="dnnForm dnnEditBasicSettings" id="dnnEditBasicSettings">
+        <h2 id="dnnSitePanel-BasicSettings" class="dnnFormSectionHead dnnClear">
+            <a href="#" class="dnnSectionExpanded">@Dnn.LocalizeString("BasicSettings")</a>
+        </h2>
+        <fieldset>
+            <div class="dnnFormItem">
+                <div><label for="departureAt">Departure at</label></div>
+                @Html.TextBoxFor(m => m.DepartureAt)
+            </div>
+            <div class="dnnFormItem">
+                <div><label for="planID">Flight plan</label></div>
+                @Html.TextBoxFor(m => m.PlanID)
+            </div>
+        </fieldset>
+    </div>
+    <button type="submit" class="dnnPrimaryAction">Book Test Flight</button>
+    <a id="cancelEdit" href="#" class="dnnSecondaryAction">Cancel</a>
+</div>
+
+<script type="text/javascript">
+    /*globals jQuery, window, Sys */
+    (function($, Sys) {
+        $(function() {
+            $('#cancelEdit').click(function() { dnnModal.closePopUp(false); });
+        });
+
+    }(jQuery, window.Sys));
+</script>
