@@ -16,14 +16,6 @@
 <p>
     Please remember, the dates in the grid are in UTC time as our flight operations
     uses UTC time.
-
-    <a href="@Url.Action("Create", "TestFlightGrid", new {ctl = "Create" })">Create booking</a>
-
-    <br />
-
-    @Url.Action("Create", "TestFlightGrid")<br />
-    @Url.Action("Create", "TestFlightGrid", new { ctl = "Create" })
-
 </p>
 <table class="tf-booking-grid">
     <thead>
@@ -56,11 +48,18 @@
                     var cellTime = cellDay.AddHours(i * 3);
                     var isPast = cellTime < utcNow;
                     var isLocked = cellTime < utcNow.AddHours(12);
+                    var isFree = !isPast && !isLocked;
                     var cellColor = isPast || isLocked ? "gray" : "green";
 
                     <td style="background-color: @cellColor">
                         @cellTime.ToLocalTime()<br />
                         @cellTime
+
+                        @if (isFree)
+                        {
+                            <a href="@Url.Action("Create", "TestFlightGrid", new {ctl = "Create", departureAt = cellTime })">Create booking</a>
+                        }
+
                     </td>
 
                 }

@@ -1,5 +1,13 @@
 ﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<RF.Modules.TestFlightAppointment.Models.CreateBookingParameters>
 
+@using RF.Modules.TestFlightAppointment.Models;
+
+@{ 
+    var plans = ViewBag.Plans as TestFlightPlan[]
+        ?? new RF.Modules.TestFlightAppointment.Models.TestFlightPlan[0];
+    var planOptions = new System.Web.Mvc.SelectList(plans, "FlightPlanID", "Name");
+}
+
 <h1>Create a booking</h1>
 
 @using System.Collections.Generic
@@ -13,11 +21,12 @@
         <fieldset>
             <div class="dnnFormItem">
                 <div><label for="departureAt">Departure at</label></div>
-                @Html.TextBoxFor(m => m.DepartureAt)
+                <p>@Model.DepartureAt</p>
+                @Html.HiddenFor(m => m.DepartureAt)
             </div>
             <div class="dnnFormItem">
                 <div><label for="planID">Flight plan</label></div>
-                @Html.TextBoxFor(m => m.PlanID)
+                @Html.DropDownListFor(m => m.PlanID, planOptions)
             </div>
         </fieldset>
     </div>

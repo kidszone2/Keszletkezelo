@@ -1,5 +1,7 @@
-﻿using DotNetNuke.Web.Mvc.Framework.ActionFilters;
+﻿using DotNetNuke.Entities.Users;
+using DotNetNuke.Web.Mvc.Framework.ActionFilters;
 using DotNetNuke.Web.Mvc.Framework.Controllers;
+using RF.Modules.TestFlightAppointment.Models;
 using RF.Modules.TestFlightAppointment.Services;
 using System;
 using System.Diagnostics;
@@ -29,9 +31,18 @@ namespace RF.Modules.TestFlightAppointment.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(DateTime? departureAt)
         {
-            return PartialView("Create");
+            var model = new CreateBookingParameters()
+            {
+                DepartureAt = departureAt ?? DateTime.UtcNow,
+            };
+
+            ViewBag.Plans = BookingManager.FindFlightPlans(
+                User.IsAdmin
+                );
+
+            return PartialView("Create", model);
         }
     }
 }
