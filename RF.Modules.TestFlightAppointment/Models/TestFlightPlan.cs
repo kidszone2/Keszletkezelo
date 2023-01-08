@@ -12,6 +12,7 @@
 
 using DotNetNuke.ComponentModel.DataAnnotations;
 using System.Web.Caching;
+using System.Web.UI.WebControls;
 
 namespace RF.Modules.TestFlightAppointment.Models
 {
@@ -30,5 +31,9 @@ namespace RF.Modules.TestFlightAppointment.Models
         public string Description { get; set; }
 
         public bool IsPublic { get; set; }
+
+        [IgnoreColumn]
+        public int TotalDuration => Duration + 1;
+
     }
 }

@@ -12,6 +12,7 @@
         ?? new RF.Modules.TestFlightAppointment.Models.TestFlightPlan[0];
     var planOptions = new System.Web.Mvc.SelectList(plans, "FlightPlanID", "Name");
     var submitID = String.Format("submit-{0}", Guid.NewGuid());
+    var errorID = String.Format("error-{0}", Guid.NewGuid());
 }
 
 <h1>Create a booking</h1>
@@ -21,9 +22,7 @@
 
 <div id="Item-@Dnn.ModuleContext.ModuleId">
     <div class="dnnForm dnnEditBasicSettings" id="dnnEditBasicSettings">
-        <h2 id="dnnSitePanel-BasicSettings" class="dnnFormSectionHead dnnClear">
-            <a href="#" class="dnnSectionExpanded">@Dnn.LocalizeString("BasicSettings")</a>
-        </h2>
+        <p id="@errorID"></p>
         <fieldset>
             <div class="dnnFormItem">
                 <div><label for="departureAt">Departure at</label></div>
@@ -50,7 +49,18 @@
                 var serviceUrl = sf.getServiceRoot('TestFlightBooking');
 
                 var proxy = new TestFlightBookingProxy(serviceUrl);
-                proxy.create('@Model.DepartureAt.ToString("s")', 2);
+                proxy.create(
+                    '@Model.DepartureAt.ToString("s")',
+                    2,
+                    function (success, response) {
+                        if (success) {
+                            dnnModal.closePopUp(true);
+
+                        } else {
+                            $('#@errorID').html(response);
+
+                        }
+                    });
             });
         });
 

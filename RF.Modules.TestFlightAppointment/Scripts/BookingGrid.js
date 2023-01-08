@@ -18,8 +18,8 @@ class TestFlightBookingProxy {
                 callback(true, response);
             }
         })
-            .fail(function(xhr) {
-                var json = xhr.responseJSON ? JSON.parse(xhr.responseJSON) : null;
+            .fail(function (xhr) {
+                var json = xhr.responseJSON ? xhr.responseJSON : null;
                 var jsonError = json && json.error ? json.error : null;
 
                 var message = jsonError
@@ -40,10 +40,7 @@ class TestFlightBookingProxy {
                 DepartureAt: departureAt,
                 PlanID: planID
             },
-            function (success, response) {
-                console.log("Success:", success);
-                console.log("Response:", response);
-            }
+            callback
         )
     }
 

@@ -6,6 +6,7 @@ using DotNetNuke.UI.UserControls;
 using DotNetNuke.Web.Api;
 using RF.Modules.TestFlightAppointment.Models;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -81,7 +82,15 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
             if (currentUser.UserID == Null.NullInteger)
                 throw new TestFlightException("Guests can't create booking.");
 
-            booking.Duration = plan.Duration + 1;
+            var existingBookings = FindBookingsByDate(
+                booking.DepartureAt,
+                booking.DepartureAt.AddHours(plan.TotalDuration),
+                false
+                );
+            if (existingBookings.Length != 0)
+                throw new ApplicationException("There is an other booking in the selected slot.");
+
+            booking.Duration = plan.TotalDuration;
             booking.CreatedByUserID = currentUser.UserID;
             booking.CreatedOnDate = DateTime.Now;
 
@@ -130,7 +139,7 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
 
                 return ctx.GetRepository<TestFlightBooking>()
                     .Find(
-                        "WHERE @0 <= CreatedOnDate AND CreatedOnDate <= @1 AND (IsCancelled = 0 OR @2 = 1)",
+                        "WHERE @0 <= DepartureAt AND DepartureAt <= @1 AND (IsCancelled = 0 OR @2 = 1)",
                         actualFrom,
                         actualTo,
                         findAll
@@ -148,7 +157,7 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
 
                 return ctx.GetRepository<TestFlightBooking>()
                     .Find(
-                        "WHERE @0 <= CreatedOnDate AND CreatedOnDate <= @1 AND CreatedByUserID = @2",
+                        "WHERE @0 <= DepartureAt AND DepartureAt <= @1 AND CreatedByUserID = @2",
                         actualFrom,
                         actualTo,
                         userID
