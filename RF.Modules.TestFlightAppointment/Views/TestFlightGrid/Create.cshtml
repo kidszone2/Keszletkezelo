@@ -1,11 +1,17 @@
 ﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<RF.Modules.TestFlightAppointment.Models.CreateBookingParameters>
 
+@using DotNetNuke.Web.Client.ClientResourceManagement
+@using DotNetNuke.Framework.JavaScriptLibraries
+
 @using RF.Modules.TestFlightAppointment.Models;
 
-@{ 
+@{
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/DesktopModules/MVC/RF.Modules.TestFlightAppointment/Scripts/BookingGrid.js");
+
     var plans = ViewBag.Plans as TestFlightPlan[]
         ?? new RF.Modules.TestFlightAppointment.Models.TestFlightPlan[0];
     var planOptions = new System.Web.Mvc.SelectList(plans, "FlightPlanID", "Name");
+    var submitID = String.Format("submit-{0}", Guid.NewGuid());
 }
 
 <h1>Create a booking</h1>
@@ -30,7 +36,7 @@
             </div>
         </fieldset>
     </div>
-    <button type="submit" class="dnnPrimaryAction">Book Test Flight</button>
+    <button type="button" id="@submitID" class="dnnPrimaryAction">Book Test Flight</button>
     <a id="cancelEdit" href="#" class="dnnSecondaryAction">Cancel</a>
 </div>
 
@@ -38,8 +44,18 @@
     /*globals jQuery, window, Sys */
     (function($, Sys) {
         $(function() {
-            $('#cancelEdit').click(function() { dnnModal.closePopUp(false); });
+            $('#cancelEdit').click(function () { dnnModal.closePopUp(false); });
+            $('#@submitID').click(function () {
+                var sf = $.ServicesFramework('@Dnn.ActiveModule.ModuleID');
+                var serviceUrl = sf.getServiceRoot('TestFlightBooking');
+
+                var proxy = new TestFlightBookingProxy(serviceUrl);
+                proxy.create('@Model.DepartureAt.ToString("s")', 2);
+            });
         });
+
+
+
 
     }(jQuery, window.Sys));
 </script>

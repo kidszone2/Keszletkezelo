@@ -1,4 +1,6 @@
 ﻿using DotNetNuke.Entities.Users;
+using DotNetNuke.Framework;
+using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Web.Mvc.Framework.ActionFilters;
 using DotNetNuke.Web.Mvc.Framework.Controllers;
 using RF.Modules.TestFlightAppointment.Models;
@@ -33,6 +35,10 @@ namespace RF.Modules.TestFlightAppointment.Controllers
         [HttpGet]
         public ActionResult Create(DateTime? departureAt)
         {
+            DotNetNuke.Framework.JavaScriptLibraries.JavaScript.RequestRegistration(CommonJs.jQuery);
+            DotNetNuke.Framework.JavaScriptLibraries.JavaScript.RequestRegistration(CommonJs.DnnPlugins);
+            ServicesFramework.Instance.RequestAjaxScriptSupport();
+
             var model = new CreateBookingParameters()
             {
                 DepartureAt = departureAt ?? DateTime.UtcNow,
