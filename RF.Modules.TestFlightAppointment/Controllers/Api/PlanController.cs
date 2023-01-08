@@ -6,17 +6,12 @@ using System.Web.Http;
 
 namespace RF.Modules.TestFlightAppointment.Controllers.Api
 {
-    public class PlanController : RestApiControllerBase
+
+    public class PlanController : BookingApiControllerBase
     {
         public PlanController(
             ITestFlightBookingManager bookingManager
-            )
-        {
-            BookingManager = bookingManager
-                ?? throw new ArgumentNullException(nameof(bookingManager));
-        }
-
-        private ITestFlightBookingManager BookingManager { get; }
+            ) : base(bookingManager) { }
 
         [HttpGet]
         [AllowAnonymous]

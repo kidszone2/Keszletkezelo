@@ -19,6 +19,8 @@ namespace RF.Modules.TestFlightAppointment.Services
             bool findAll
             );
 
+        TestFlightPlan FindPlanByID(int planID);
+
         TestFlightBooking CreateBooking(
             TestFlightBooking booking
             );

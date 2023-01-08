@@ -131,8 +131,11 @@
     </Compile>
     <Compile Include="Components\FeatureController.cs" />
     <Compile Include="Components\RouteMapper.cs" />
+    <Compile Include="Controllers\Api\BookingApiControllerBase.cs" />
+    <Compile Include="Controllers\Api\BookingController.cs" />
     <Compile Include="Controllers\Api\PlanController.cs" />
     <Compile Include="Controllers\Api\RestApiControllerBase.cs" />
+    <Compile Include="Models\CreateBookingParameters.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\TestFlightGridController.cs" />
     <Compile Include="Models\Settings.cs" />
@@ -145,6 +148,7 @@
     <Compile Include="Services\Implementations\TestFlightBookingManager.cs" />
     <Compile Include="Services\ITestFlightBookingManager.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Util\DateUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\Documentation.css" />

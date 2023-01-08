@@ -75,10 +75,13 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
 
         public TestFlightBooking CreateBooking(TestFlightBooking booking)
         {
+            var plan = FindPlanByID(booking.FlightPlanID);
+
             var currentUser = UserController.GetCurrentUserInfo();
             if (currentUser.UserID == Null.NullInteger)
                 throw new TestFlightException("Guests can't create booking.");
 
+            booking.Duration = plan.Duration + 1;
             booking.CreatedByUserID = currentUser.UserID;
             booking.CreatedOnDate = DateTime.Now;
 
@@ -106,6 +109,15 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
                     .ToArray();
 
                 return new BookingData(booking, participants);
+            }
+        }
+
+        public TestFlightPlan FindPlanByID(int planID)
+        {
+            using (var ctx = DataContext.Instance())
+            {
+                var r = ctx.GetRepository<TestFlightPlan>();
+                return r.GetById(planID);
             }
         }
 
