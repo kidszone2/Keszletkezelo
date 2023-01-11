@@ -155,7 +155,6 @@
     <Content Include="Documentation\Documentation.html" />
     <Content Include="License.txt" />
     <Content Include="Scripts\BookingGrid.js" />
-    <Content Include="module.css" />
     <Content Include="ReleaseNotes.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -184,7 +183,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Assets\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\TestFlightGrid\Create.cshtml" />
     <None Include="Web.config">
