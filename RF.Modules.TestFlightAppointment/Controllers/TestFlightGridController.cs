@@ -60,5 +60,12 @@ namespace RF.Modules.TestFlightAppointment.Controllers
 
             return PartialView("Create", model);
         }
+
+        [HttpGet]
+        public ActionResult Detail(int bookingID)
+        {
+            var booking = BookingManager.FindBookingByID(bookingID);
+            return View(booking);
+        }
     }
 }

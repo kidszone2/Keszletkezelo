@@ -188,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\TestFlightGrid\Create.cshtml" />
+    <Content Include="Views\TestFlightGrid\Detail.cshtml" />
     <None Include="Web.config">
       <SubType>Designer</SubType>
     </None>
