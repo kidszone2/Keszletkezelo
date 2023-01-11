@@ -57,13 +57,11 @@ package-lock.json
 *.aab
 
 #
-#   Web Apps
+#   DotNetNuke modules
 # -----------------------------------------------------------------------------
 *.css.map
 **/node_modules/
-**/wwwroot/
-**/.jsobj/
-appsettings.Development.json
+**/packages/
 
 #
 #   Generated files
