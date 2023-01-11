@@ -15,17 +15,17 @@
 
     <!--in VS 2012 we exclude the packages folder -->
     <ItemGroup>     
-      <InstallInclude Include="**\*.ascx" Exclude="packages\**" />
-      <InstallInclude Include="**\*.asmx" Exclude="packages\**" />
-      <InstallInclude Include="**\*.css" Exclude="packages\**" />
-      <InstallInclude Include="**\*.html" Exclude="packages\**" />
-      <InstallInclude Include="**\*.cshtml" Exclude="packages\**" />
-      <InstallInclude Include="**\*.htm" Exclude="packages\**" />
-      <InstallInclude Include="**\*.resx" Exclude="packages\**" />
-      <InstallInclude Include="**\*.aspx" Exclude="packages\**" />
-      <InstallInclude Include="**\*.js" Exclude="packages\**" />
-      <InstallInclude Include="**\*.txt"  Exclude="**\obj\**;**\_ReSharper*\**;packages\**;**\.git\**;" />
-      <InstallInclude Include="**\images\**" Exclude="packages\**" />
+      <InstallInclude Include="**\*.ascx" Exclude="packages\**;node_modules\**" />
+      <InstallInclude Include="**\*.asmx" Exclude="packages\**;node_modules\**" />
+      <InstallInclude Include="**\*.css" Exclude="packages\**;node_modules\**" />
+      <InstallInclude Include="**\*.html" Exclude="packages\**;node_modules\**" />
+      <InstallInclude Include="**\*.cshtml" Exclude="packages\**;node_modules\**" />
+      <InstallInclude Include="**\*.htm" Exclude="packages\**;node_modules\**" />
+      <InstallInclude Include="**\*.resx" Exclude="packages\**;node_modules\**" />
+      <InstallInclude Include="**\*.aspx" Exclude="packages\**;node_modules\**" />
+      <InstallInclude Include="**\*.js" Exclude="packages\**;node_modules\**" />
+      <InstallInclude Include="**\*.txt"  Exclude="**\obj\**;**\_ReSharper*\**;packages\**;**\.git\**;node_modules\**" />
+      <InstallInclude Include="**\images\**" Exclude="packages\**;node_modules\**" />
       
     </ItemGroup>
 
@@ -45,7 +45,8 @@
       <SourceInclude Include="**\images\**" />
       <SourceInclude Include="**\*.cs" />
 	  <SourceInclude Include="**\Packages\**" />
-      <SourceInclude Include="**\*.cs.designer" />
+	  <SourceInclude Include="**\node_modules\**" />
+	  <SourceInclude Include="**\*.cs.designer" />
       <SourceInclude Include="**\*.csproj" />
       <SourceInclude Include="**\*.targets" />
       <SourceInclude Include="**\*.sln" />
