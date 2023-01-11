@@ -36,7 +36,7 @@ npx gulp build
 - Find the DNN module package in the install directory
 - Install the "Install" package
 
-# Changes made to template
+# Changes made to the template
 In order to have the NPM tools work, some minor changes have been applied to the template.
 
 ## ModulePackage.targets
