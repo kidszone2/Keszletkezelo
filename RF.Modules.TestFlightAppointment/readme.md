@@ -1,5 +1,8 @@
 This document describes how you can compile, run and debug this module.
 
+# About this module
+TBD
+
 # Requirements
 - Visual Studio 2022
 - Visual Studio Code
@@ -18,10 +21,10 @@ For building you need both use Visual Studio and Visual Studio code.
 npm i
 ```
 
-- Run gulp build
+- Run gulp build via NodeJS:
 
 ```
-gulp build
+npx gulp build
 ```
 
 ## Compile and build the project
@@ -32,4 +35,3 @@ gulp build
 # Install and Run
 - Find the DNN module package in the install directory
 - Install the "Install" package
-

@@ -1,18 +1,15 @@
 table.tf-booking-grid {
-    width: 100%;
+  width: 100%;
 }
-
-    table.tf-booking-grid .not-available {
-        background-color: #ccc;
-        color: #888;
-    }
-
-    table.tf-booking-grid .booked {
-        background-color: #ccccff;
-        color: black;
-    }
-
-    table.tf-booking-grid .free {
-        background-color: white;
-        color: black;
-    }
+table.tf-booking-grid .not-available {
+  background-color: #ccc;
+  color: #888;
+}
+table.tf-booking-grid .booked {
+  background-color: #ccccff;
+  color: black;
+}
+table.tf-booking-grid .free {
+  background-color: white;
+  color: black;
+}
