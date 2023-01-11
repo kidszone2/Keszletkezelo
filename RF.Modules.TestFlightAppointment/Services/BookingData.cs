@@ -9,14 +9,19 @@ namespace RF.Modules.TestFlightAppointment.Services
 
         public TestFlightParticipant[] Participants { get; }
 
+        public TestFlightPlan Plan { get; }
+
         internal BookingData(
             TestFlightBooking booking,
+            TestFlightPlan plan,
             TestFlightParticipant[] participants
             )
         {
-            Booking = booking 
+            Booking = booking
                 ?? throw new ArgumentNullException(nameof(booking));
-            Participants = participants 
+            Plan = plan
+                ?? throw new ArgumentNullException(nameof(plan));
+            Participants = participants
                 ?? throw new ArgumentNullException(nameof(participants));
         }
     }

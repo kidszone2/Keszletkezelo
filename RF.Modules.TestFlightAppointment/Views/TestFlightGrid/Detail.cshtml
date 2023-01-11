@@ -3,20 +3,59 @@
 @using RF.Modules.TestFlightAppointment.Services;
 
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = "Test flight Booking Detail";
 
     var cancelID = String.Format("cancel-{0}", Guid.NewGuid());
 }
 
-<h2>Detail</h2>
+@if (Model == null)
+{
+    <p>This is an invalid booking.</p>
+}
+else
+{
 
-<button type="button" id="@cancelID" class="dnnDeleteAction">Cancel Test Flight</button>
-<a id="cancelEdit" href="#" class="dnnSecondaryAction">Cancel</a>
+    <h2>Flight schedule</h2>
+    <hr />
+    <h3>Departure at @Model.Booking.DepartureAt.ToString("yyyy-MM-dd HH:mm:ss") (UTC)</h3>
+    <h3>Duration: @Model.Booking.Duration hour(s)</h3>
+
+    <h3>Flight plan</h3>
+    <hr />
+    <p class="tf-plan-name">@Model.Plan.Name</p>
+    <p class="tf-plan-description">@Model.Plan.Description</p>
+
+    <h3>Passengers</h3>
+    <hr />
+    <table class="tf-participants">
+        <thead>
+            <tr>
+                <th>Passenger</th>
+                <th>Role</th>
+                <th>Licence</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var participant in Model.Participants)
+            {
+                <tr>
+                    <td>@participant.PassengerName</td>
+                    <td>@participant.Role</td>
+                    <td>@participant.PilotLicense</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <button type="button" id="@cancelID" class="dnnDeleteAction">Cancel Test Flight</button>
+}
+<a id="cancelEdit" href="#" class="dnnSecondaryAction">Close</a>
 
 <script type="text/javascript">
     /*globals jQuery, window, Sys */
-    (function($, Sys) {
-        $(function() {
+    (function ($, Sys) {
+        $(function () {
             $('#cancelEdit').click(function () { dnnModal.closePopUp(false); });
         });
 

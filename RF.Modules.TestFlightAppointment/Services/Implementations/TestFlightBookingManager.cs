@@ -113,11 +113,14 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
                 if (booking is null || !HasAccess(booking))
                     return null;
 
+                var plan = ctx.GetRepository<TestFlightPlan>()
+                    .GetById(booking.FlightPlanID);
+
                 var participants = ctx.GetRepository<TestFlightParticipant>()
                     .Find("WHERE BookingID = @0", bookingID)
                     .ToArray();
 
-                return new BookingData(booking, participants);
+                return new BookingData(booking, plan, participants);
             }
         }
 
