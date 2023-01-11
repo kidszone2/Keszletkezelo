@@ -33,5 +33,13 @@ namespace RF.Modules.TestFlightAppointment.Models
         public int Duration { get; set; }
 
         public int FlightPlanID { get; set; }
+
+        public bool IsBookedAt(DateTime dateTime, int duration)
+        {
+            var periodEnd = dateTime.AddHours(duration);
+            var flightEnd = DepartureAt.AddHours(Duration);
+            return DepartureAt < periodEnd && dateTime < flightEnd;
+
+        }
     }
 }

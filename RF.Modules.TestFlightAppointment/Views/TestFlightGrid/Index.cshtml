@@ -2,6 +2,8 @@
 
 @using DotNetNuke.Web.Client.ClientResourceManagement
 @using DotNetNuke.Framework.JavaScriptLibraries
+@using RF.Modules.TestFlightAppointment.Models;
+@using System.Linq;
 
 @{
     ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/DesktopModules/MVC/RF.Modules.TestFlightAppointment/Scripts/BookingGrid.js");
@@ -11,6 +13,9 @@
         .AddDays(-(int)utcNow.DayOfWeek + 1)
         .Date;
     var localNow = DateTime.Now;
+
+    var bookings = ViewBag.Bookings as TestFlightBooking[]
+        ?? new TestFlightBooking[] { };
 }
 
 <p>
@@ -48,17 +53,24 @@
                     var cellTime = cellDay.AddHours(i * 3);
                     var isPast = cellTime < utcNow;
                     var isLocked = cellTime < utcNow.AddHours(12);
-                    var isFree = !isPast && !isLocked;
-                    var cellColor = isPast || isLocked ? "gray" : "green";
+                    var booking = bookings.FirstOrDefault(b => b.IsBookedAt(cellTime, 3));
+                    var isBooked = booking != null;
+                    var isFree = !isPast && !isLocked && !isBooked;
+                    var cellCssClass = isPast || isLocked
+                        ? "not-available"
+                        : (isBooked ? "booked" : "free");
 
-                    <td style="background-color: @cellColor">
-                        @cellTime.ToLocalTime()<br />
-                        @cellTime
+                    <td class="@cellCssClass">
 
-                        @if (isFree)
+                        @if (booking != null)
+                        {
+                            <a href="javascript:void">FLIGHT BOOKED</a>
+                        }
+                        else if (isFree)
                         {
                             <a href="@Url.Action("Create", "TestFlightGrid", new {ctl = "Create", departureAt = cellTime })">Create booking</a>
                         }
+
 
                     </td>
 

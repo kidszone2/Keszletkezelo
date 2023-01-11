@@ -29,6 +29,16 @@ namespace RF.Modules.TestFlightAppointment.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            var utcNow = DateTime.UtcNow; 
+            var from = utcNow
+                .AddDays(-(int)utcNow.DayOfWeek + 1)
+                .Date;
+            var to = from
+                .AddDays(8)
+                .Date;
+            var bookings = BookingManager.FindBookingsByDate(from, to, false);
+            ViewBag.Bookings = bookings;
+
             return View();
         }
 

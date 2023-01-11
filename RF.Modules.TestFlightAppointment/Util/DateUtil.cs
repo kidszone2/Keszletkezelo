@@ -5,6 +5,7 @@ namespace RF.Modules.TestFlightAppointment.Util
 {
     internal static class DateUtil
     {
+
         public static DateTime FirstDateOfWeekISO8601(int year, int weekOfYear)
         {
             DateTime jan1 = new DateTime(year, 1, 1);
