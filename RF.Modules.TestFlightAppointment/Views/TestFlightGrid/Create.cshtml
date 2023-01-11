@@ -13,6 +13,7 @@
     var planOptions = new System.Web.Mvc.SelectList(plans, "FlightPlanID", "Name");
     var submitID = String.Format("submit-{0}", Guid.NewGuid());
     var errorID = String.Format("error-{0}", Guid.NewGuid());
+    var formID = String.Format("form-{0}", Guid.NewGuid());
 }
 
 <h1>Create a booking</h1>
@@ -21,7 +22,7 @@
 @using DotNetNuke.Web.Mvc.Helpers
 
 <div id="Item-@Dnn.ModuleContext.ModuleId">
-    <div class="dnnForm dnnEditBasicSettings" id="dnnEditBasicSettings">
+    <div class="dnnForm dnnEditBasicSettings" id="@formID">
         <p id="@errorID"></p>
         <fieldset>
             <div class="dnnFormItem">
@@ -47,11 +48,14 @@
             $('#@submitID').click(function () {
                 var sf = $.ServicesFramework('@Dnn.ActiveModule.ModuleID');
                 var serviceUrl = sf.getServiceRoot('TestFlightBooking');
+                var planID = $('#@formID')
+                    .find('[name="PlanID"]')
+                    .val();
 
                 var proxy = new TestFlightBookingProxy(serviceUrl);
                 proxy.create(
                     '@Model.DepartureAt.ToString("s")',
-                    2,
+                    planID,
                     function (success, response) {
                         if (success) {
                             dnnModal.closePopUp(true);
