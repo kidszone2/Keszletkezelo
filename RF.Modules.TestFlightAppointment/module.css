@@ -1,5 +1,58 @@
 
 
+.dnnDeleteAction,
+.dnnPrimaryAction {
+  padding: 6px 6px;
+  line-height: 18px;
+}
+
+.dnnDeleteAction {
+  display: inline-block;
+  margin-bottom: 9px;
+  cursor: pointer;
+  min-width: 75px;
+  *overflow: visible;
+  border: 1px solid #c2c2c2;
+  background: #eaeaea;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  border-color: #9e0d0d; 
+  background: #ed3737;
+  -webkit-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.6), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.6), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4);
+  color: #efefef;
+  text-shadow: 0px -1px 0px #931818;
+  background: -moz-linear-gradient(top, #ea3535 0%, #cd2121 100%); 
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ea3535), color-stop(100%, #cd2121)); 
+  background: -webkit-linear-gradient(top, #ea3535 0%, #cd2121 100%); 
+  background: linear-gradient(top, #ea3535 0%, #cd2121 100%); 
+}
+.dnnDeleteAction:hover {
+  border-color: #9e0d0d;
+  background: #f36c6c;
+  color: #fff;
+  background: -moz-linear-gradient(top, #f36c6c 0%, #d24343 100%); 
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f36c6c), color-stop(100%, #d24343)); 
+  background: -webkit-linear-gradient(top, #f36c6c 0%, #d24343 100%); 
+  background: linear-gradient(top, #f36c6c 0%, #d24343 100%); 
+}
+.dnnDeleteAction:active {
+  border-color: #9e0d0d;
+  background: #be1f1f;
+  -webkit-box-shadow: inset 0px 1px 5px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0px 1px 5px 0px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  background: -moz-linear-gradient(top, #be1f1f 0%, #e03030 100%); 
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #be1f1f), color-stop(100%, #e03030)); 
+  background: -webkit-linear-gradient(top, #be1f1f 0%, #e03030 100%); 
+  background: linear-gradient(top, #be1f1f 0%, #e03030 100%); 
+}
+
+
 table.tf-booking-grid {
   width: 100%;
 }
@@ -15,3 +68,4 @@ table.tf-booking-grid .free {
   background-color: white;
   color: black;
 }
+

@@ -1,13 +1,10 @@
-﻿using DotNetNuke.Entities.Users;
-using DotNetNuke.Framework;
+﻿using DotNetNuke.Framework;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Web.Mvc.Framework.ActionFilters;
 using DotNetNuke.Web.Mvc.Framework.Controllers;
 using RF.Modules.TestFlightAppointment.Models;
 using RF.Modules.TestFlightAppointment.Services;
 using System;
-using System.Diagnostics;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace RF.Modules.TestFlightAppointment.Controllers
@@ -24,12 +21,17 @@ namespace RF.Modules.TestFlightAppointment.Controllers
             BookingManager = bookingManager
                 ?? throw new ArgumentNullException(nameof(bookingManager));
         }
-
+        private static void InitPopup()
+        {
+            DotNetNuke.Framework.JavaScriptLibraries.JavaScript.RequestRegistration(CommonJs.jQuery);
+            DotNetNuke.Framework.JavaScriptLibraries.JavaScript.RequestRegistration(CommonJs.DnnPlugins);
+            ServicesFramework.Instance.RequestAjaxScriptSupport();
+        }
 
         [HttpGet]
         public ActionResult Index()
         {
-            var utcNow = DateTime.UtcNow; 
+            var utcNow = DateTime.UtcNow;
             var from = utcNow
                 .AddDays(-(int)utcNow.DayOfWeek + 1)
                 .Date;
@@ -45,9 +47,7 @@ namespace RF.Modules.TestFlightAppointment.Controllers
         [HttpGet]
         public ActionResult Create(DateTime? departureAt)
         {
-            DotNetNuke.Framework.JavaScriptLibraries.JavaScript.RequestRegistration(CommonJs.jQuery);
-            DotNetNuke.Framework.JavaScriptLibraries.JavaScript.RequestRegistration(CommonJs.DnnPlugins);
-            ServicesFramework.Instance.RequestAjaxScriptSupport();
+            InitPopup();
 
             var model = new CreateBookingParameters()
             {
@@ -61,9 +61,12 @@ namespace RF.Modules.TestFlightAppointment.Controllers
             return PartialView("Create", model);
         }
 
+
         [HttpGet]
         public ActionResult Detail(int bookingID)
         {
+            InitPopup();
+
             var booking = BookingManager.FindBookingByID(bookingID);
             return View(booking);
         }

@@ -4,7 +4,22 @@
 
 @{
     ViewBag.Title = "Detail";
+
+    var cancelID = String.Format("cancel-{0}", Guid.NewGuid());
 }
 
 <h2>Detail</h2>
 
+<button type="button" id="@cancelID" class="dnnDeleteAction">Cancel Test Flight</button>
+<a id="cancelEdit" href="#" class="dnnSecondaryAction">Cancel</a>
+
+<script type="text/javascript">
+    /*globals jQuery, window, Sys */
+    (function($, Sys) {
+        $(function() {
+            $('#cancelEdit').click(function () { dnnModal.closePopUp(false); });
+        });
+
+
+    }(jQuery, window.Sys));
+</script>
