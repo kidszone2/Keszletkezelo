@@ -49,14 +49,17 @@
                 <div class="dnnFormItem">
                     <div><label for="planID">Role</label></div>
                     @Html.DropDownList("PassengerRole", passengerTypeOptions)
+                    @Html.ValidationMessage("PassengerRole", "This field is mandatory.")
                 </div>
                 <div class="dnnFormItem">
                     <div><label for="departureAt">Name</label></div>
                     @Html.TextBox("PassengerName")
+                    @Html.ValidationMessage("PassengerName", "This field is mandatory.")
                 </div>
                 <div class="dnnFormItem">
                     <div><label for="departureAt">License</label></div>
                     @Html.TextBox("PilotLicense")
+                    @Html.ValidationMessage("PassengerName", "This field is mandatory for pilots.")
                 </div>
             </fieldset>
 
@@ -72,19 +75,26 @@
         $(function () {
             $('#cancelEdit').click(function () { dnnModal.closePopUp(false); });
 
-            new BookingGridForm('#@passengersFormID');
+            var passengerGrid = new BookingGridForm('#@passengersFormID');
 
             $('#@submitID').click(function () {
+                if (!passengerGrid.validate())
+                    return;
+
                 var sf = $.ServicesFramework('@Dnn.ActiveModule.ModuleID');
                 var serviceUrl = sf.getServiceRoot('TestFlightBooking');
                 var planID = $('#@formID')
                     .find('[name="PlanID"]')
                     .val();
+                var data = {
+                    planID,
+                    departureAt: '@Model.DepartureAt.ToString("s")'
+                };
 
                 var proxy = new TestFlightBookingProxy(serviceUrl);
-                proxy.create(
-                    '@Model.DepartureAt.ToString("s")',
-                    planID,
+                passengerGrid.submit(
+                    proxy,
+                    data,
                     function (success, response) {
                         if (success) {
                             dnnModal.closePopUp(true);

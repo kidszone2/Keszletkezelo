@@ -57,6 +57,7 @@ fieldset.dnnInlineForm {
     .dnnFormItem {
         display: inline-block;
         flex-grow: 1;
+        flex-basis: 0;
         width: unset;
         padding-right: 10px;
 
@@ -69,6 +70,14 @@ fieldset.dnnInlineForm {
             width: 100%;
             max-width: unset;
             box-sizing: border-box;
+        }
+
+        .dnnFormError {
+            top: -15px;
+            display: inline-block;
+            position: relative;
+            margin-left: 13px;
+            color: red;
         }
     }
 }

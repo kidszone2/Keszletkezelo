@@ -48,6 +48,19 @@ class TestFlightBookingProxy {
             callback
         )
     }
+    
+    addPassenger(bookingID, data, callback) {
+        this.post(
+            this.baseUrl + 'Booking/Add',
+            {
+                BookingID: bookingID,
+                Name: data.name,
+                Role: data.role,
+                License: data.license
+            },
+            callback
+        );
+    }
 
 }
 /******************************************************************************
@@ -69,18 +82,18 @@ class BookingGridPassengerRow {
     }
 
     attach() {
-        this.$type = this.$row.find('select[name="PassengerRole"]');
+        this.$role = this.$row.find('select[name="PassengerRole"]');
         this.$passenger = this.$row.find('input[name="PassengerName"]');
         this.$license = this.$row.find('input[name="PilotLicense"]');
 
         var that = this;
-        this.$type.change(function (e) { that.onTypeChanged(); })
+        this.$role.change(function (e) { that.onTypeChanged(); })
     }
 
     refresh() {
-        var type = this.$type.val();
-        this.$passenger.prop('disabled', !type);
-        this.$license.prop('disabled', type != 'pilot');
+        var role = this.$role.val();
+        this.$passenger.prop('disabled', !role);
+        this.$license.prop('disabled', role != 'pilot');
     }
 
     setVisiblity(visible) {
@@ -91,9 +104,26 @@ class BookingGridPassengerRow {
         }
     }
 
+    clearErrors() {
+        this.$row.find('.dnnFormError').remove();
+    }
+
+    errorFor($element, message) {
+        var $error = $element.next('.dnnFormError');
+        if (!$error.length) {
+            $error = $('<span></span>', {
+                'class': 'dnnFormError'
+            });
+            $element.after($error);
+
+        }
+
+        $error.html(message);
+    }
+
     getData() {
         return {
-            role: this.$type.val(),
+            role: this.$role.val(),
             name: this.$passenger.val(),
             license: this.$license.val()
         }
@@ -102,6 +132,33 @@ class BookingGridPassengerRow {
     isEmpty() {
         var data = this.getData();
         return !data.role && !data.name && !data.license;
+    }
+
+    validate() {
+        this.clearErrors();
+
+        if (this.isEmpty())
+            return true;
+
+        var result = true;
+        var data = this.getData();
+        if (!data.role) {
+            this.errorFor(this.$role, 'Please select passenger role.');
+            result = false;
+        }
+
+        if (!data.name) {
+            this.errorFor(this.$passenger, 'Please enter passenger name.');
+            result = false;
+        }
+
+        if (data.role == 'pilot' && !/([a-zA-Z\d]{3})-(\d{5})-(\d{3})-(\d{4})-[sSmMlLcC]/gm.test(data.license)) {
+            this.errorFor(this.$license, 'Please enter pilot license (The AAA-00000-000-0000-X formatted code).');
+            result = false;
+
+        }
+        
+        return result;
     }
 
     onTypeChanged() {
@@ -147,9 +204,78 @@ class BookingGridForm {
     refresh() {
         var isVisible = true;
         this.rows.forEach(function(row) {
-            row.setVisiblity(isVisible);
+            var hasData = !row.isEmpty();
+            row.setVisiblity(isVisible || hasData);
             isVisible = !row.isEmpty();
         });
+    }
+
+    getData() {
+        return this.rows
+            .filter(function(row) { return !row.isEmpty(); })
+            .map(function(row) { return row.getData(); });
+    }
+
+    getDataChain() {
+        var data = this.getData();
+        for (var i = 0; i < data.length; i++) {
+            data[i].next = i < (data.length-1)
+                ? data[i+1] : null;
+
+        }
+
+        return data;
+    }
+
+    validate() {
+        var isValid = true;
+        this.rows.forEach(function(row) {
+            isValid = isValid && row.validate();
+        });
+
+        return isValid;
+    }
+
+    submit(proxy, data, callback) {
+        var that = this;
+        proxy.create(
+            data.departureAt,
+            data.planID,
+            function (success, response) {
+                if (success) {
+                    that.submitPassengers(proxy, response.BookingID, callback);
+
+                } else {
+                    callback(success, response);
+
+                }
+            });
+    }
+
+    submitPassengers(proxy, bookingID, callback) {
+        var data = this.getDataChain();
+        if (data.length == 0) {
+            callback(true, []);
+            return;
+        }
+
+        var item = data[0];
+        var passengers = [];
+        var submitNext = function (success, response) {
+            if (!success) {
+                callback(false, response);
+                return;
+            }
+
+            passengers.push(response);
+            item = item.next;
+            if (!item)
+                callback(true, passengers);
+            else
+                proxy.addPassenger(bookingID, item, submitNext);
+        }
+
+        proxy.addPassenger(bookingID, item, submitNext);
     }
 
     onRowChanged() {

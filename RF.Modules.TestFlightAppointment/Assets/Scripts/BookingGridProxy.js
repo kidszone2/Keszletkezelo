@@ -48,5 +48,18 @@ class TestFlightBookingProxy {
             callback
         )
     }
+    
+    addPassenger(bookingID, data, callback) {
+        this.post(
+            this.baseUrl + 'Booking/Add',
+            {
+                BookingID: bookingID,
+                Name: data.name,
+                Role: data.role,
+                License: data.license
+            },
+            callback
+        );
+    }
 
 }

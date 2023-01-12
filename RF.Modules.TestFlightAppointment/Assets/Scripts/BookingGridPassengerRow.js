@@ -17,18 +17,18 @@ class BookingGridPassengerRow {
     }
 
     attach() {
-        this.$type = this.$row.find('select[name="PassengerRole"]');
+        this.$role = this.$row.find('select[name="PassengerRole"]');
         this.$passenger = this.$row.find('input[name="PassengerName"]');
         this.$license = this.$row.find('input[name="PilotLicense"]');
 
         var that = this;
-        this.$type.change(function (e) { that.onTypeChanged(); })
+        this.$role.change(function (e) { that.onTypeChanged(); })
     }
 
     refresh() {
-        var type = this.$type.val();
-        this.$passenger.prop('disabled', !type);
-        this.$license.prop('disabled', type != 'pilot');
+        var role = this.$role.val();
+        this.$passenger.prop('disabled', !role);
+        this.$license.prop('disabled', role != 'pilot');
     }
 
     setVisiblity(visible) {
@@ -39,9 +39,26 @@ class BookingGridPassengerRow {
         }
     }
 
+    clearErrors() {
+        this.$row.find('.dnnFormError').remove();
+    }
+
+    errorFor($element, message) {
+        var $error = $element.next('.dnnFormError');
+        if (!$error.length) {
+            $error = $('<span></span>', {
+                'class': 'dnnFormError'
+            });
+            $element.after($error);
+
+        }
+
+        $error.html(message);
+    }
+
     getData() {
         return {
-            role: this.$type.val(),
+            role: this.$role.val(),
             name: this.$passenger.val(),
             license: this.$license.val()
         }
@@ -50,6 +67,33 @@ class BookingGridPassengerRow {
     isEmpty() {
         var data = this.getData();
         return !data.role && !data.name && !data.license;
+    }
+
+    validate() {
+        this.clearErrors();
+
+        if (this.isEmpty())
+            return true;
+
+        var result = true;
+        var data = this.getData();
+        if (!data.role) {
+            this.errorFor(this.$role, 'Please select passenger role.');
+            result = false;
+        }
+
+        if (!data.name) {
+            this.errorFor(this.$passenger, 'Please enter passenger name.');
+            result = false;
+        }
+
+        if (data.role == 'pilot' && !/([a-zA-Z\d]{3})-(\d{5})-(\d{3})-(\d{4})-[sSmMlLcC]/gm.test(data.license)) {
+            this.errorFor(this.$license, 'Please enter pilot license (The AAA-00000-000-0000-X formatted code).');
+            result = false;
+
+        }
+        
+        return result;
     }
 
     onTypeChanged() {

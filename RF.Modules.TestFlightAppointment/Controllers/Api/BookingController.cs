@@ -71,5 +71,30 @@ namespace RF.Modules.TestFlightAppointment.Controllers.Api
                 return JsonException(ex);
             }
         }
+
+        [HttpPost]
+        public HttpResponseMessage Add([FromBody] AddPassengerParameters args)
+        {
+            try
+            {
+                if (!args.Validate())
+                    return Json(401, "Invalid participant data.");
+
+                var participant = new TestFlightParticipant()
+                {
+                    PassengerName = args.Name,
+                    Role = args.Role,
+                    PilotLicense = args.License,
+                };
+
+                participant = BookingManager.AddParticipantTo(args.BookingID, participant);
+
+                return Json(participant);
+            }
+            catch (Exception ex)
+            {
+                return JsonException(ex);
+            }
+        }
     }
 }

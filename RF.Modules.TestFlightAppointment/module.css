@@ -18,6 +18,7 @@ fieldset.dnnInlineForm {
 fieldset.dnnInlineForm .dnnFormItem {
   display: inline-block;
   flex-grow: 1;
+  flex-basis: 0;
   width: unset;
   padding-right: 10px;
 }
@@ -29,6 +30,13 @@ fieldset.dnnInlineForm .dnnFormItem select {
   width: 100%;
   max-width: unset;
   box-sizing: border-box;
+}
+fieldset.dnnInlineForm .dnnFormItem .dnnFormError {
+  top: -15px;
+  display: inline-block;
+  position: relative;
+  margin-left: 13px;
+  color: red;
 }
 
 .dnnDeleteAction {

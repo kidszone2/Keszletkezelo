@@ -50,9 +50,23 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
             TestFlightParticipant participant
             )
         {
+            var currentUser = UserController.GetCurrentUserInfo();
+            if (currentUser.UserID == Null.NullInteger)
+                throw new TestFlightException("Guests can't create booking.");
+            
+            var booking = FindBookingByID(bookingID);
+            if (booking is null)
+                throw new ApplicationException("Booking not found.");
+
+            AssertAccess(booking.Booking);
+
             using (var ctx = DataContext.Instance())
             {
                 var r = ctx.GetRepository<TestFlightParticipant>();
+
+                participant.BookingID = booking.Booking.BookingID;
+                participant.CreatedByUserID = currentUser.UserID;
+                participant.CreatedOnDate = DateTime.Now;
                 r.Insert(participant);
 
                 return participant;
@@ -142,7 +156,7 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
 
                 return ctx.GetRepository<TestFlightBooking>()
                     .Find(
-                        "WHERE @0 <= DepartureAt AND DepartureAt <= @1 AND (IsCancelled = 0 OR @2 = 1)",
+                        "WHERE @0 < DepartureAt AND DepartureAt < @1 AND (IsCancelled = 0 OR @2 = 1)",
                         actualFrom,
                         actualTo,
                         findAll

@@ -2,6 +2,7 @@
 
 namespace RF.Modules.TestFlightAppointment.Models
 {
+
     public class CreateBookingParameters
     {
         public int PlanID { get; set; }

@@ -17,7 +17,6 @@ namespace RF.Modules.TestFlightAppointment.Models
 {
     [TableName("TestFlightBookings")]
     [PrimaryKey(nameof(BookingID), AutoIncrement = true)]
-    [Scope("ModuleId")]
     public class TestFlightBooking
     {
         public int BookingID { get; set; }
