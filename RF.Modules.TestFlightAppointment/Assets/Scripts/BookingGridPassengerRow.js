@@ -32,8 +32,24 @@ class BookingGridPassengerRow {
     }
 
     setVisiblity(visible) {
-        this.$row.visible(visible);
+        if (visible) {
+            this.$row.show();
+        } else {
+            this.$row.hide();
+        }
+    }
 
+    getData() {
+        return {
+            role: this.$type.val(),
+            name: this.$passenger.val(),
+            license: this.$license.val()
+        }
+    }
+
+    isEmpty() {
+        var data = this.getData();
+        return !data.role && !data.name && !data.license;
     }
 
     onTypeChanged() {

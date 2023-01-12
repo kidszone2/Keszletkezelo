@@ -12,6 +12,7 @@ class BookingGridForm {
     constructor (selector) {
         this.$grid = $(selector);
         this.attach();
+        this.refresh();
     }
 
     attach() {
@@ -21,7 +22,21 @@ class BookingGridForm {
         this.$grid.find('[data-role="tf-passenger-row"]')
             .each(function(idx, element) {
                 var row = new BookingGridPassengerRow($(element));
+                row.changedCallback = function() { that.onRowChanged(); };
                 that.rows.push(row);
             });
+    }
+
+    refresh() {
+        var isVisible = true;
+        this.rows.forEach(function(row) {
+            row.setVisiblity(isVisible);
+            isVisible = !row.isEmpty();
+        });
+    }
+
+    onRowChanged() {
+        this.refresh();
+
     }
 }

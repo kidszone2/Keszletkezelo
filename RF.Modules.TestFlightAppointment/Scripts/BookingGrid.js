@@ -84,8 +84,24 @@ class BookingGridPassengerRow {
     }
 
     setVisiblity(visible) {
-        this.$row.visible(visible);
+        if (visible) {
+            this.$row.show();
+        } else {
+            this.$row.hide();
+        }
+    }
 
+    getData() {
+        return {
+            role: this.$type.val(),
+            name: this.$passenger.val(),
+            license: this.$license.val()
+        }
+    }
+
+    isEmpty() {
+        var data = this.getData();
+        return !data.role && !data.name && !data.license;
     }
 
     onTypeChanged() {
@@ -113,6 +129,7 @@ class BookingGridForm {
     constructor (selector) {
         this.$grid = $(selector);
         this.attach();
+        this.refresh();
     }
 
     attach() {
@@ -122,7 +139,21 @@ class BookingGridForm {
         this.$grid.find('[data-role="tf-passenger-row"]')
             .each(function(idx, element) {
                 var row = new BookingGridPassengerRow($(element));
+                row.changedCallback = function() { that.onRowChanged(); };
                 that.rows.push(row);
             });
+    }
+
+    refresh() {
+        var isVisible = true;
+        this.rows.forEach(function(row) {
+            row.setVisiblity(isVisible);
+            isVisible = !row.isEmpty();
+        });
+    }
+
+    onRowChanged() {
+        this.refresh();
+
     }
 }
