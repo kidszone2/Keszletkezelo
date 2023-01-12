@@ -43,6 +43,36 @@ $error-hover-grad-end: #d24343;
     text-align: center;
 }
 
+.dnnFormItem {
+    input,
+    select {
+        height: 34px;
+    }
+}
+
+fieldset.dnnInlineForm {
+    display: flex;
+    flex-direction: row;
+
+    .dnnFormItem {
+        display: inline-block;
+        flex-grow: 1;
+        width: unset;
+        padding-right: 10px;
+
+        &:last-child {
+            padding-right: 0px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            max-width: unset;
+            box-sizing: border-box;
+        }
+    }
+}
+
 .dnnDeleteAction {
     @include dnn-button();
 

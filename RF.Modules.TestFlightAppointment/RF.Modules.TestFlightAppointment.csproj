@@ -154,7 +154,6 @@
     <Content Include="Documentation\Documentation.css" />
     <Content Include="Documentation\Documentation.html" />
     <Content Include="License.txt" />
-    <Content Include="Scripts\BookingGrid.js" />
     <Content Include="ReleaseNotes.txt" />
   </ItemGroup>
   <ItemGroup>

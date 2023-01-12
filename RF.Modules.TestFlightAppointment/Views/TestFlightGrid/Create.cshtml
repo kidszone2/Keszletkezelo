@@ -1,5 +1,7 @@
 ﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<RF.Modules.TestFlightAppointment.Models.CreateBookingParameters>
 
+@using System.Web.Mvc;
+
 @using DotNetNuke.Web.Client.ClientResourceManagement
 @using DotNetNuke.Framework.JavaScriptLibraries
 
@@ -10,10 +12,12 @@
 
     var plans = ViewBag.Plans as TestFlightPlan[]
         ?? new RF.Modules.TestFlightAppointment.Models.TestFlightPlan[0];
-    var planOptions = new System.Web.Mvc.SelectList(plans, "FlightPlanID", "Name");
+    var planOptions = new SelectList(plans, "FlightPlanID", "Name");
+    var passengerTypeOptions = ViewBag.PassengerTypes as SelectList;
     var submitID = String.Format("submit-{0}", Guid.NewGuid());
     var errorID = String.Format("error-{0}", Guid.NewGuid());
     var formID = String.Format("form-{0}", Guid.NewGuid());
+    var passengersFormID = String.Format("passengers-{0}", Guid.NewGuid());
 }
 
 <h1>Create a booking</h1>
@@ -36,15 +40,40 @@
             </div>
         </fieldset>
     </div>
+
+    <div class="dnnForm" id="@passengersFormID">
+        <h2>Passengers</h2>
+        @for (var i = 0; i < 5; i++)
+        {
+            <fieldset class="dnnInlineForm" data-role="tf-passenger-row">
+                <div class="dnnFormItem">
+                    <div><label for="planID">Role</label></div>
+                    @Html.DropDownList("PassengerRole", passengerTypeOptions)
+                </div>
+                <div class="dnnFormItem">
+                    <div><label for="departureAt">Name</label></div>
+                    @Html.TextBox("PassengerName")
+                </div>
+                <div class="dnnFormItem">
+                    <div><label for="departureAt">License</label></div>
+                    @Html.TextBox("PilotLicense")
+                </div>
+            </fieldset>
+
+        }
+    </div>
+
     <button type="button" id="@submitID" class="dnnPrimaryAction">Book Test Flight</button>
     <a id="cancelEdit" href="#" class="dnnSecondaryAction">Cancel</a>
 </div>
 
 <script type="text/javascript">
-    /*globals jQuery, window, Sys */
-    (function($, Sys) {
-        $(function() {
+    (function ($, Sys) {
+        $(function () {
             $('#cancelEdit').click(function () { dnnModal.closePopUp(false); });
+
+            new BookingGridForm('#@passengersFormID');
+
             $('#@submitID').click(function () {
                 var sf = $.ServicesFramework('@Dnn.ActiveModule.ModuleID');
                 var serviceUrl = sf.getServiceRoot('TestFlightBooking');

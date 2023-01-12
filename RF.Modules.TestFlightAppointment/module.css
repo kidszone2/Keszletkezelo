@@ -6,6 +6,31 @@
   line-height: 18px;
 }
 
+.dnnFormItem input,
+.dnnFormItem select {
+  height: 34px;
+}
+
+fieldset.dnnInlineForm {
+  display: flex;
+  flex-direction: row;
+}
+fieldset.dnnInlineForm .dnnFormItem {
+  display: inline-block;
+  flex-grow: 1;
+  width: unset;
+  padding-right: 10px;
+}
+fieldset.dnnInlineForm .dnnFormItem:last-child {
+  padding-right: 0px;
+}
+fieldset.dnnInlineForm .dnnFormItem input,
+fieldset.dnnInlineForm .dnnFormItem select {
+  width: 100%;
+  max-width: unset;
+  box-sizing: border-box;
+}
+
 .dnnDeleteAction {
   display: inline-block;
   margin-bottom: 9px;

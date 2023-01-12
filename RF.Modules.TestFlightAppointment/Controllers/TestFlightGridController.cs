@@ -57,10 +57,16 @@ namespace RF.Modules.TestFlightAppointment.Controllers
             ViewBag.Plans = BookingManager.FindFlightPlans(
                 User.IsAdmin
                 );
+            ViewBag.PassengerTypes = new SelectList(new[]
+            {
+                new SelectListItem() { Text = "-- select --", Value = null, Selected = true },
+                new SelectListItem() { Text = "Passenger", Value = "passenger", },
+                new SelectListItem() { Text = "Pilot", Value = "pilot" },
+                new SelectListItem() { Text = "Engineer", Value = "engineer" },
+            }, nameof(SelectListItem.Value), nameof(SelectListItem.Text));
 
             return PartialView("Create", model);
         }
-
 
         [HttpGet]
         public ActionResult Detail(int bookingID)
