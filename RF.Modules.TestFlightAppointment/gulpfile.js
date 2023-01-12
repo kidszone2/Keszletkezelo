@@ -10,6 +10,7 @@
 var gulp = require("gulp");
 var sass = require("gulp-sass")(require('sass'));
 var strip = require("gulp-strip-css-comments");
+var concat = require('gulp-concat');
 
 gulp.task('module-styles', function () {
     return gulp
@@ -19,4 +20,15 @@ gulp.task('module-styles', function () {
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('build', gulp.parallel('module-styles'));
+gulp.task('module-scripts', function () {
+    var scripts = [
+        'Assets/Scripts/BookingGridProxy.js'
+    ];
+
+    return gulp
+        .src(scripts)
+        .pipe(concat('BookingGrid.js'))
+        .pipe(gulp.dest('Scripts'));
+})
+
+gulp.task('build', gulp.parallel('module-styles', 'module-scripts'));
