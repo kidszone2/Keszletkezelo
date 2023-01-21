@@ -45,6 +45,38 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
                 throw new TestFlightException("Permission denied.");
         }
 
+        private BookingData[] FetchBookingData(IDataContext ctx, TestFlightBooking[] bookings)
+        {
+            var currentUser = UserController.GetCurrentUserInfo();
+            var planIDs = bookings.Select(b => b.FlightPlanID)
+                .Distinct()
+                .ToArray();
+
+            var plans = ctx.GetRepository<TestFlightPlan>()
+                .Find("WHERE FlightPlanID in (@0)", planIDs)
+                .ToArray();
+
+            var bookingIDs = bookings.Select(b => b.BookingID)
+                .Distinct()
+                .ToArray();
+            var participants = ctx.GetRepository<TestFlightParticipant>()
+                .Find("WHERE BookingID in (@0)", bookingIDs)
+                .ToArray();
+
+            return bookings
+                .Select(b => new BookingData(
+                    b,
+                    plans.FirstOrDefault(p => p.FlightPlanID == b.FlightPlanID),
+                    participants.Where(p => p.BookingID == b.BookingID).ToArray()
+                    )
+                {
+                    User = currentUser.IsAdmin
+                        ? UserController.GetUserById(currentUser.PortalID, b.CreatedByUserID)
+                        : (b.CreatedByUserID == currentUser.UserID ? currentUser : null)
+                })
+                .ToArray();
+        }
+
         public TestFlightParticipant AddParticipantTo(
             int bookingID,
             TestFlightParticipant participant
@@ -147,14 +179,14 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
             }
         }
 
-        public TestFlightBooking[] FindBookingsByDate(DateTime? from, DateTime? to, bool findAll)
+        public BookingData[] FindBookingsByDate(DateTime? from, DateTime? to, bool findAll)
         {
             using (var ctx = DataContext.Instance())
             {
                 var actualFrom = from ?? DateTime.MinValue;
                 var actualTo = to ?? DateTime.MaxValue;
 
-                return ctx.GetRepository<TestFlightBooking>()
+                var result = ctx.GetRepository<TestFlightBooking>()
                     .Find(
                         "WHERE @0 < DepartureAt AND DepartureAt < @1 AND (IsCancelled = 0 OR @2 = 1)",
                         actualFrom,
@@ -162,17 +194,18 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
                         findAll
                         )
                     .ToArray();
+                return FetchBookingData(ctx, result);
             }
         }
 
-        public TestFlightBooking[] FindBookingsByUser(int userID, DateTime? from, DateTime? to)
+        public BookingData[] FindBookingsByUser(int userID, DateTime? from, DateTime? to)
         {
             using (var ctx = DataContext.Instance())
             {
                 var actualFrom = from ?? DateTime.MinValue;
                 var actualTo = to ?? DateTime.MaxValue;
 
-                return ctx.GetRepository<TestFlightBooking>()
+                var result = ctx.GetRepository<TestFlightBooking>()
                     .Find(
                         "WHERE @0 <= DepartureAt AND DepartureAt <= @1 AND CreatedByUserID = @2",
                         actualFrom,
@@ -180,6 +213,7 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
                         userID
                         )
                     .ToArray();
+                return FetchBookingData(ctx, result);
             }
         }
 

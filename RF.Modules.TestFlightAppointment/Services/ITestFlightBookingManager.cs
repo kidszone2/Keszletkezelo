@@ -7,13 +7,13 @@ namespace RF.Modules.TestFlightAppointment.Services
     {
         BookingData FindBookingByID(int bookingID);
 
-        TestFlightBooking[] FindBookingsByUser(
+        BookingData[] FindBookingsByUser(
             int userID,
             DateTime? from,
             DateTime? to
             );
 
-        TestFlightBooking[] FindBookingsByDate(
+        BookingData[] FindBookingsByDate(
             DateTime? from,
             DateTime? to,
             bool findAll

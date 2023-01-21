@@ -184,9 +184,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Views\TestFlightGrid\Create.cshtml" />
     <Content Include="Views\TestFlightGrid\Detail.cshtml" />

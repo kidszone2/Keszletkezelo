@@ -101,6 +101,9 @@ table.tf-booking-grid .booked {
   background-color: #ccccff;
   color: black;
 }
+table.tf-booking-grid .booked .box {
+  border: 1px solid #8787c2;
+}
 table.tf-booking-grid .free {
   background-color: white;
   color: black;
@@ -115,6 +118,7 @@ table.tf-booking-grid tr td {
   height: 1px;
 }
 table.tf-booking-grid tr td .box {
+  padding: 3px;
   height: 100%;
   width: 100%;
   text-decoration: none;
