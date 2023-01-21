@@ -16,6 +16,7 @@
 
     var bookings = ViewBag.Bookings as TestFlightBooking[]
         ?? new TestFlightBooking[] { };
+    var prevline = new TestFlightBooking[7];
 }
 
 <p>
@@ -59,20 +60,38 @@
                     var cellCssClass = isPast || isLocked
                         ? "not-available"
                         : (isBooked ? "booked" : "free");
+                    var isRepeated = booking != null && prevline[d] == booking;
+                    prevline[d] = booking;
+                    // TODO: take in account the time starts the day before this
+                    var rowspan = booking == null ? 1 : (int)Math.Ceiling(booking.Duration / 3d);
 
-                    <td class="@cellCssClass">
-
-                        @if (booking != null)
-                        {
-                            <a href="@Url.Action("Detail", "TestFlightGrid", new {ctl = "Detail", bookingID = booking.BookingID })">BOOKED</a>
-                        }
-                        else if (isFree)
-                        {
-                            <a href="@Url.Action("Create", "TestFlightGrid", new {ctl = "Create", departureAt = cellTime })">Create booking</a>
-                        }
+                    if (!isRepeated)
+                    {
+                        <td class="@cellCssClass" rowspan="@rowspan">
 
 
-                    </td>
+                            @if (booking != null)
+                            {
+                                <a href="@Url.Action("Detail", "TestFlightGrid", new {ctl = "Detail", bookingID = booking.BookingID })">
+                                    <div class="box">
+                                        <span>
+                                            @booking.
+                                        </span>
+                                    </div>
+                                </a>
+                            }
+                            else if (isFree)
+                            {
+                                <a href="@Url.Action("Create", "TestFlightGrid", new {ctl = "Create", departureAt = cellTime })">
+                                    <div class="box">
+                                        <span class="autohide">Create booking</span>
+                                    </div>
+                                </a>
+                            }
+
+
+                        </td>
+                    }
 
                 }
             </tr>
