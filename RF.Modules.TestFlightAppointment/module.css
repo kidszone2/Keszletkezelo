@@ -73,6 +73,9 @@ fieldset.dnnInlineForm .dnnFormItem .dnnFormError {
   background: -webkit-linear-gradient(top, #f36c6c 0%, #d24343 100%); 
   background: linear-gradient(top, #f36c6c 0%, #d24343 100%); 
 }
+.dnnDeleteAction:visited {
+  color: white;
+}
 .dnnDeleteAction:active {
   border-color: #9e0d0d;
   background: #be1f1f;
@@ -102,3 +105,29 @@ table.tf-booking-grid .free {
   color: black;
 }
 
+
+
+.tf-dialog-overlay {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.7803921569);
+}
+.tf-dialog-overlay .tf-dialog-container {
+  background-color: white;
+  display: block;
+  width: 60vw;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.tf-dialog-overlay .tf-dialog-container .tf-dialog-button {
+  margin: 2px;
+}

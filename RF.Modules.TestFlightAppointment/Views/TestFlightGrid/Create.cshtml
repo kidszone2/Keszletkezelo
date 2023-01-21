@@ -81,8 +81,6 @@
                 if (!passengerGrid.validate())
                     return;
 
-                var sf = $.ServicesFramework('@Dnn.ActiveModule.ModuleID');
-                var serviceUrl = sf.getServiceRoot('TestFlightBooking');
                 var planID = $('#@formID')
                     .find('[name="PlanID"]')
                     .val();
@@ -91,7 +89,10 @@
                     departureAt: '@Model.DepartureAt.ToString("s")'
                 };
 
-                var proxy = new TestFlightBookingProxy(serviceUrl);
+                var proxy = new TestFlightBookingProxy(
+                    '@Dnn.ActiveModule.ModuleID',
+                    'TestFlightBooking'
+                );
                 passengerGrid.submit(
                     proxy,
                     data,

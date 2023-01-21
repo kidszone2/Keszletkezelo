@@ -9,8 +9,10 @@
 
 class TestFlightBookingProxy {
 
-    constructor(baseUrl) {
-        this.baseUrl = baseUrl;
+    constructor(moduleID, serviceName) {
+        this.serviceName = serviceName;
+        var sf = $.ServicesFramework(moduleID);
+        this.baseUrl = sf.getServiceRoot(serviceName);
     }
 
     invoke(method, url, data, callback) {
@@ -36,6 +38,16 @@ class TestFlightBookingProxy {
 
     post(url, data, callback) {
         this.invoke('POST', url, data, callback);
+    }
+
+    cancel(bookingID, callback) {
+        this.post(
+            this.baseUrl + 'Booking/Cancel',
+            {
+                BookingID: bookingID
+            },
+            callback
+        )
     }
 
     create(departureAt, planID, callback) {

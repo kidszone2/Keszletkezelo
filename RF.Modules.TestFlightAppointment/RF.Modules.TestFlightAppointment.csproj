@@ -136,6 +136,7 @@
     <Compile Include="Controllers\Api\PlanController.cs" />
     <Compile Include="Controllers\Api\RestApiControllerBase.cs" />
     <Compile Include="Models\AddPassengerParameters.cs" />
+    <Compile Include="Models\CancelBookingParameters.cs" />
     <Compile Include="Models\CreateBookingParameters.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\TestFlightGridController.cs" />

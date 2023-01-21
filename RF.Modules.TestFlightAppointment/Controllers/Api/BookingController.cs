@@ -73,6 +73,21 @@ namespace RF.Modules.TestFlightAppointment.Controllers.Api
         }
 
         [HttpPost]
+        public HttpResponseMessage Cancel([FromBody] CancelBookingParameters args)
+        {
+            try
+            {
+                BookingManager.CancelBooking(args.BookingID);
+
+                return JsonOk();
+            }
+            catch (Exception ex)
+            {
+                return JsonException(ex);
+            }
+        }
+
+        [HttpPost]
         public HttpResponseMessage Add([FromBody] AddPassengerParameters args)
         {
             try

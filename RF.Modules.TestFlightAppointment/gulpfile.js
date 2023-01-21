@@ -22,6 +22,7 @@ gulp.task('module-styles', function () {
 
 gulp.task('module-scripts', function () {
     var scripts = [
+        'Assets/Scripts/Dialog.js',
         'Assets/Scripts/BookingGridProxy.js',
         'Assets/Scripts/BookingGridPassengerRow.js',
         'Assets/Scripts/BookingGridForm.js'

@@ -1,11 +1,17 @@
 ﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<BookingData>
 
+@using DotNetNuke.Web.Client.ClientResourceManagement
+@using DotNetNuke.Framework.JavaScriptLibraries
+
 @using RF.Modules.TestFlightAppointment.Services;
 
 @{
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/DesktopModules/MVC/RF.Modules.TestFlightAppointment/Scripts/BookingGrid.js");
+
     ViewBag.Title = "Test flight Booking Detail";
 
-    var cancelID = String.Format("cancel-{0}", Guid.NewGuid());
+    var cancelBookingID = String.Format("cancel-{0}", Guid.NewGuid());
+    var errorID = String.Format("error-{0}", Guid.NewGuid());
 }
 
 @if (Model == null)
@@ -47,17 +53,53 @@ else
         </tbody>
     </table>
 
-
-    <button type="button" id="@cancelID" class="dnnDeleteAction">Cancel Test Flight</button>
+    <p id="@errorID"></p>
+    <button type="button" id="@cancelBookingID" class="dnnDeleteAction">Cancel Test Flight</button>
 }
 <a id="cancelEdit" href="#" class="dnnSecondaryAction">Close</a>
 
 <script type="text/javascript">
-    /*globals jQuery, window, Sys */
     (function ($, Sys) {
         $(function () {
             $('#cancelEdit').click(function () { dnnModal.closePopUp(false); });
+
+            $('#@cancelBookingID').click(function () {
+
+                var dialog = new BookingDialog(
+                    'Confirm',
+                    'Do you really want to cancel this booking?'
+                );
+                dialog
+                    .option('cancel', { caption: 'Cancel' })
+                    .option('confirm', { caption: 'Confirm', type: 'Delete' })
+                    .show(function (choice) {
+                        switch (choice) {
+                            case 'cancel':
+                                dnnModal.closePopUp(true);
+                                break;
+
+                            case 'confirm':
+                                var proxy = new TestFlightBookingProxy(
+                                    '@Dnn.ActiveModule.ModuleID',
+                                    'TestFlightBooking'
+                                );
+                                proxy.cancel(
+                                        @Model.Booking.BookingID,
+                                    function (success, response) {
+                                        if (success) {
+                                            dnnModal.closePopUp(true);
+
+                                        } else {
+                                            $('#@errorID').html(response);
+
+                                        }
+                                    });
+                                break;
+                        }
+                    })
+            });
         });
+
 
 
     }(jQuery, window.Sys));

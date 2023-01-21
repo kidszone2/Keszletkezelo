@@ -102,6 +102,10 @@ fieldset.dnnInlineForm {
         @include dnn-button-gradient($error-hover-grad-start, $error-hover-grad-end);
     }
 
+    &:visited {
+        color: white;
+    }
+
     &:active {
         border-color: #9e0d0d;
         background: #be1f1f;

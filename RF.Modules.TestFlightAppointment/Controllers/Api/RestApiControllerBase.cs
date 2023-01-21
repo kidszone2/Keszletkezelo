@@ -23,6 +23,9 @@ namespace RF.Modules.TestFlightAppointment.Controllers.Api
         protected HttpResponseMessage Json(int status, object data)
             => Json((HttpStatusCode)status, data);
 
+        protected HttpResponseMessage JsonOk()
+            => Json(new { reslult = "ok" });
+
         protected HttpResponseMessage JsonException(Exception ex)
             => Json(
                 HttpStatusCode.InternalServerError, new
