@@ -89,6 +89,16 @@ fieldset.dnnInlineForm .dnnFormItem .dnnFormError {
 }
 
 
+.tf-header h2 {
+  margin-left: 12.5%;
+}
+.tf-header hr {
+  background-color: black;
+  height: 1px;
+  border: none;
+}
+
+
 
 table.tf-booking-grid {
   width: 100%;
@@ -115,6 +125,7 @@ table.tf-booking-grid tr {
   height: 1px;
 }
 table.tf-booking-grid tr td {
+  width: 12.5%;
   height: 1px;
 }
 table.tf-booking-grid tr td .box {
