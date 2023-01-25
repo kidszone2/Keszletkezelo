@@ -141,6 +141,24 @@ table.tf-booking-grid tr td .box span.autohide {
 }
 
 
+.tf-nav-control {
+  margin-top: 1.1em;
+  margin-bottom: 1.1em;
+}
+.tf-nav-control .tf-left {
+  position: absolute;
+  left: 0;
+}
+.tf-nav-control .tf-center {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tf-nav-control .tf-right {
+  float: right;
+}
+
+
 
 .tf-dialog-overlay {
   display: block;

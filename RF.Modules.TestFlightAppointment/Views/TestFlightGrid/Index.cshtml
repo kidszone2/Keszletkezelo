@@ -4,26 +4,30 @@
 @using DotNetNuke.Framework.JavaScriptLibraries
 @using RF.Modules.TestFlightAppointment.Services
 @using RF.Modules.TestFlightAppointment.Models;
+@using RF.Modules.TestFlightAppointment.Util;
 @using System.Linq;
 
 @{
     ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/DesktopModules/MVC/RF.Modules.TestFlightAppointment/Scripts/BookingGrid.js");
 
     var utcNow = DateTime.UtcNow;
-    var startDay = utcNow
-        .AddDays(-(int)utcNow.DayOfWeek + 1)
-        .Date;
+    var weekOfYear = (WeekOfYear)ViewBag.WeekOfYear;
+    var startDay = weekOfYear.FirstDay;
     var localNow = DateTime.Now;
 
     var bookings = ViewBag.Bookings as BookingData[]
         ?? new BookingData[] { };
     var prevline = new BookingData[7];
+    var thisWeek = new WeekOfYear(utcNow);
+    var nextWeek = weekOfYear.AddWeeks(1);
+    var prevWeek = weekOfYear.AddWeeks(-1);
 }
 
 <p>
     Please remember, the dates in the grid are in UTC time as our flight operations
     uses UTC time.
 </p>
+
 <table class="tf-booking-grid">
     <thead>
         <tr>
@@ -106,6 +110,12 @@
         }
     </tbody>
 </table>
+
+<div class="tf-nav-control">
+    <a href="@Url.Action("Index")?year=@(nextWeek.Year)&week=@(nextWeek.Week)" class="dnnSecondaryAction tf-right">Next week</a>
+    <a href="@Url.Action("Index")?year=@(thisWeek.Year)&week=@(thisWeek.Week)" class="dnnSecondaryAction tf-center">This week</a>
+    <a href="@Url.Action("Index")?year=@(prevWeek.Year)&week=@(prevWeek.Week)" class="dnnSecondaryAction tf-left">Previuos week</a>
+</div>
 
 <script type="text/javascript">
     /*globals jQuery, window, Sys */

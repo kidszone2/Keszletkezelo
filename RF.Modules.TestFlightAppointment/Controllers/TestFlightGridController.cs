@@ -4,6 +4,7 @@ using DotNetNuke.Web.Mvc.Framework.ActionFilters;
 using DotNetNuke.Web.Mvc.Framework.Controllers;
 using RF.Modules.TestFlightAppointment.Models;
 using RF.Modules.TestFlightAppointment.Services;
+using RF.Modules.TestFlightAppointment.Util;
 using System;
 using System.Web.Mvc;
 
@@ -29,17 +30,16 @@ namespace RF.Modules.TestFlightAppointment.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int? year, int? week)
         {
+            var weekOfYear = year.HasValue && week.HasValue
+                ? new WeekOfYear(year.Value, week.Value)
+                : new WeekOfYear(DateTime.UtcNow);
+
             var utcNow = DateTime.UtcNow;
-            var from = utcNow
-                .AddDays(-(int)utcNow.DayOfWeek + 1)
-                .Date;
-            var to = from
-                .AddDays(8)
-                .Date;
-            var bookings = BookingManager.FindBookingsByDate(from, to, false);
+            var bookings = BookingManager.FindBookingsByDate(weekOfYear.FirstDay, weekOfYear.LastDay, false);
             ViewBag.Bookings = bookings;
+            ViewBag.WeekOfYear = weekOfYear;
 
             return View();
         }

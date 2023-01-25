@@ -151,6 +151,7 @@
     <Compile Include="Services\ITestFlightBookingManager.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\DateUtil.cs" />
+    <Compile Include="Util\WeekOfYear.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\Documentation.css" />

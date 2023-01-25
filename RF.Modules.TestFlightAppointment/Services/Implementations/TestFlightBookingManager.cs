@@ -52,16 +52,20 @@ namespace RF.Modules.TestFlightAppointment.Services.Implementations
                 .Distinct()
                 .ToArray();
 
-            var plans = ctx.GetRepository<TestFlightPlan>()
-                .Find("WHERE FlightPlanID in (@0)", planIDs)
-                .ToArray();
+            var plans = planIDs.Length == 0
+                ? new TestFlightPlan[0]
+                : ctx.GetRepository<TestFlightPlan>()
+                    .Find("WHERE FlightPlanID in (@0)", planIDs)
+                    .ToArray();
 
             var bookingIDs = bookings.Select(b => b.BookingID)
                 .Distinct()
                 .ToArray();
-            var participants = ctx.GetRepository<TestFlightParticipant>()
-                .Find("WHERE BookingID in (@0)", bookingIDs)
-                .ToArray();
+            var participants = bookingIDs.Length == 0
+                ? new TestFlightParticipant[0] 
+                : ctx.GetRepository<TestFlightParticipant>()
+                    .Find("WHERE BookingID in (@0)", bookingIDs)
+                    .ToArray();
 
             return bookings
                 .Select(b => new BookingData(
