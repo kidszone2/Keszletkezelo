@@ -1,4 +1,4 @@
-﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage <RF.Modules.UIElements.RF.Modules.UIElements.Models.Settings>
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage <RF.Modules.UIElements.RF.Modules.UIElements.Models.HeroSettings>
 
 @using DotNetNuke.Web.Mvc.Helpers
 
@@ -6,15 +6,15 @@
 <fieldset>
     <div class="dnnFormItem">
         <div class="dnnLabel" style="position: relative;">
-            @Html.LabelFor(m => Model.Setting1, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => Model.ImagePath, new { @class = "col-md-2 control-label" })
         </div>
-        @Html.CheckBoxFor(m => Model.Setting1)
+        @Html.TextBoxFor(m => Model.ImagePath)
     </div>
     <div class="dnnFormItem">
         <div class="dnnLabel" style="position: relative;">
-            @Html.LabelFor(m => Model.Setting2, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => Model.Title, new { @class = "col-md-2 control-label" })
         </div>
-        @Html.TextBoxFor(m => Model.Setting2)
+        @Html.TextBoxFor(m => Model.Title)
     </div>
 </fieldset>
 

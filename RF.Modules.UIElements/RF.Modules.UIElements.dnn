@@ -1,100 +1,74 @@
 <dotnetnuke type="Package" version="5.0">
-  <packages>
-    <package name="RF.Modules.UIElements" type="Module" version="00.00.01">
-      <friendlyName>RF.Modules.UIElements</friendlyName>
-      <description>RF.Modules.UIElements</description>
-      <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
-      <owner>
-        <name>Adam Halassy</name>
-        <organization>Adam Halassy</organization>
-        <url>https://rf.uni-corvinus.hu/</url>
-        <email>adam.halassy@stud.uni-corvinus.hu</email>
-      </owner>
-      <license src="License.txt"></license>
-      <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
-      <dependencies>
-        <dependency type="CoreVersion">09.08.00</dependency>
-      </dependencies>
-      <components>
-        <component type="Script">
-          <scripts>
-            <basePath>DesktopModules\MVC\RF.Modules.UIElements</basePath>
-            <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>00.00.01.SqlDataProvider</name>
-              <version>00.00.01</version>
-            </script>
-            <script type="UnInstall">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>Uninstall.SqlDataProvider</name>
-              <version>00.00.01</version>
-            </script>
-          </scripts>
-        </component>
-        <component type="ResourceFile">
-          <resourceFiles>
-            <basePath>DesktopModules/MVC/RF.Modules.UIElements</basePath>
-            <resourceFile>
-              <name>Resources.zip</name>
-            </resourceFile>
-          </resourceFiles>
-        </component>
-        <component type="Module">
-          <desktopModule>
-            <moduleName>RF.Modules.UIElements</moduleName>
-            <foldername>RF.Modules.UIElements</foldername>
-            <businessControllerClass>RF.Modules.UIElements.RF.Modules.UIElements.Components.FeatureController</businessControllerClass>
-            <supportedFeatures />
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>RF.Modules.UIElements</friendlyName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>RF.Modules.UIElements.RF.Modules.UIElements.Controllers/Item/Index.mvc</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Edit</controlKey>
-                    <controlSrc>RF.Modules.UIElements.RF.Modules.UIElements.Controllers/Item/Edit.mvc</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>Edit Content</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <viewOrder>0</viewOrder>
-                    <supportsPopUps>True</supportsPopUps>
-                  </moduleControl>
-                  <moduleControl>
-                    <controlKey>Settings</controlKey>
-                    <controlSrc>RF.Modules.UIElements.RF.Modules.UIElements.Controllers/Settings/Settings.mvc</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle>RF.Modules.UIElements Settings</controlTitle>
-                    <controlType>Edit</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-        </component>
-        <component type="Assembly">
-          <assemblies>
-            <assembly>
-              <name>RF.Modules.UIElements.dll</name>
-              <path>bin</path>
-            </assembly>
-          </assemblies>
-        </component>
-      </components>
-    </package>
-  </packages>
+	<packages>
+		<package name="RF.Modules.UIElements" type="Module" version="00.00.01">
+			<friendlyName>RF UI ELements</friendlyName>
+			<description>RF.Modules.UIElements</description>
+			<iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
+			<owner>
+				<name>Adam Halassy</name>
+				<organization>Adam Halassy</organization>
+				<url>https://rf.uni-corvinus.hu/</url>
+				<email>adam.halassy@stud.uni-corvinus.hu</email>
+			</owner>
+			<license src="License.txt"></license>
+			<releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+			<dependencies>
+				<dependency type="CoreVersion">09.08.00</dependency>
+			</dependencies>
+			<components>
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath>DesktopModules/MVC/RF.Modules.UIElements</basePath>
+						<resourceFile>
+							<name>Resources.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
+				<component type="Module">
+					<desktopModule>
+						<moduleName>RF Hero</moduleName>
+						<foldername>RF.Modules.UIElements</foldername>
+						<businessControllerClass>RF.Modules.UIElements.RF.Modules.UIElements.Components.FeatureController</businessControllerClass>
+						<supportedFeatures />
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>UIElenents - Hero Item</friendlyName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey>Hero</controlKey>
+										<controlSrc>RF.Modules.UIElements.RF.Modules.UIElements.Controllers/Hero/Index.mvc</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>RF.Modules.UIElements.RF.Modules.UIElements.Controllers/Settings/Hero.mvc</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>UIElements - Hero Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+				<component type="Assembly">
+					<assemblies>
+						<assembly>
+							<name>RF.Modules.UIElements.dll</name>
+							<path>bin</path>
+						</assembly>
+					</assemblies>
+				</component>
+			</components>
+		</package>
+	</packages>
 </dotnetnuke>
