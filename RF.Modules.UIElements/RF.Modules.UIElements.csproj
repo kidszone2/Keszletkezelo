@@ -104,6 +104,7 @@
       <DependentUpon>Settings.resx</DependentUpon>
     </Compile>
     <Compile Include="Components\FeatureController.cs" />
+    <Compile Include="Controllers\SpotlightController.cs" />
     <Compile Include="Controllers\HeroController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Models\HeroSettings.cs" />
@@ -147,6 +148,7 @@
     </Content>
     <Content Include="Views\Hero\Index.cshtml" />
     <Content Include="Views\Settings\Hero.cshtml" />
+    <Content Include="Views\Spotlight\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
