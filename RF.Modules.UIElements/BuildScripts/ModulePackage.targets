@@ -15,17 +15,17 @@
 
     <!--in VS 2012 we exclude the packages folder -->
     <ItemGroup>     
-      <InstallInclude Include="**\*.ascx" Exclude="packages\**" />
-      <InstallInclude Include="**\*.asmx" Exclude="packages\**" />
-      <InstallInclude Include="**\*.css" Exclude="packages\**" />
-      <InstallInclude Include="**\*.html" Exclude="packages\**" />
-      <InstallInclude Include="**\*.cshtml" Exclude="packages\**" />
-      <InstallInclude Include="**\*.htm" Exclude="packages\**" />
-      <InstallInclude Include="**\*.resx" Exclude="packages\**" />
-      <InstallInclude Include="**\*.aspx" Exclude="packages\**" />
-      <InstallInclude Include="**\*.js" Exclude="packages\**" />
-      <InstallInclude Include="**\*.txt"  Exclude="**\obj\**;**\_ReSharper*\**;packages\**;**\.git\**;" />
-      <InstallInclude Include="**\images\**" Exclude="packages\**" />
+      <InstallInclude Include="**\*.ascx" Exclude="packages\**;node_modules\**;Assets\**" />
+      <InstallInclude Include="**\*.asmx" Exclude="packages\**;node_modules\**;Assets\**" />
+      <InstallInclude Include="**\*.css" Exclude="packages\**;node_modules\**;Assets\**" />
+      <InstallInclude Include="**\*.html" Exclude="packages\**;node_modules\**;Assets\**" />
+      <InstallInclude Include="**\*.cshtml" Exclude="packages\**;node_modules\**;Assets\**" />
+      <InstallInclude Include="**\*.htm" Exclude="packages\**;node_modules\**;Assets\**" />
+      <InstallInclude Include="**\*.resx" Exclude="packages\**;node_modules\**;Assets\**" />
+      <InstallInclude Include="**\*.aspx" Exclude="packages\**;node_modules\**;Assets\**" />
+      <InstallInclude Include="**\*.js" Exclude="packages\**;node_modules\**;Assets\**" />
+      <InstallInclude Include="**\*.txt"  Exclude="**\obj\**;**\_ReSharper*\**;packages\**;**\.git\**;node_modules\**;Assets\**" />
+      <InstallInclude Include="**\images\**" Exclude="packages\**;node_modules\**;Assets\**" />
       
     </ItemGroup>
 
@@ -45,7 +45,8 @@
       <SourceInclude Include="**\images\**" />
       <SourceInclude Include="**\*.cs" />
 	  <SourceInclude Include="**\Packages\**" />
-      <SourceInclude Include="**\*.cs.designer" />
+	  <SourceInclude Include="**\node_modules\**" />
+	  <SourceInclude Include="**\*.cs.designer" />
       <SourceInclude Include="**\*.csproj" />
       <SourceInclude Include="**\*.targets" />
       <SourceInclude Include="**\*.sln" />
@@ -108,14 +109,14 @@
       <Output TaskParameter="Include" ItemName="SourceContent" />
     </CreateItem>
 
-    <Zip Files="@(SourceContent)" WorkingDirectory="$(MSBuildProjectDirectory)\ResourcesZip" ZipFileName="Resources.$(Extension)" />
+    <Zip Files="@(SourceContent)" WorkingDirectory="$(MSBuildProjectDirectory)\ResourcesZip" ZipFileName="Resources.$(Extension)" ZipLevel="9" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\Resources.$(Extension)" DestinationFolder="package/" />
 
     <CreateItem Include="$(MSBuildProjectDirectory)\Package\**\*.*">
       <Output TaskParameter="Include" ItemName="OutputSource" />
     </CreateItem>
 
-    <Zip Files="@(OutputSource)" WorkingDirectory="$(MSBuildProjectDirectory)\Package" ZipFileName="$(PackageName)_$(Version)_Source.$(Extension)" />
+    <Zip Files="@(OutputSource)" WorkingDirectory="$(MSBuildProjectDirectory)\Package" ZipFileName="$(PackageName)_$(Version)_Source.$(Extension)" ZipLevel="9" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Source.$(Extension)" DestinationFolder="install/" />
 
     <Delete Files="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Install.$(Extension)" />
