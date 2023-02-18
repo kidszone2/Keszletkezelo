@@ -1,14 +1,20 @@
 
 
 .rf-uielements-hero {
+  position: relative;
+  top: -102px;
+  left: 0;
+  margin: 0;
+  padding: 0;
   display: block;
   width: 100%;
   height: 100vh;
   background-size: cover;
+  margin-bottom: -102px;
 }
 .rf-uielements-hero .title-bar {
   position: relative;
-  top: 45vh;
+  top: 60vh;
   width: 100vw;
 }
 .rf-uielements-hero .title-bar h1 {
@@ -24,4 +30,5 @@
 }
 .rf-uielements-hero .title-bar .bar rect {
   fill: #ED7D31;
+  opacity: 0.8;
 }

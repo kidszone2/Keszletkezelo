@@ -20,4 +20,12 @@ gulp.task('module-styles', function () {
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('build', gulp.parallel('module-styles'));
+gulp.task('module-theme', function () {
+    return gulp
+        .src('Assets/Styles/theme.scss')
+        .pipe(sass())
+        .pipe(strip())
+        .pipe(gulp.dest('./'));
+});
+
+gulp.task('build', gulp.parallel('module-styles', 'module-theme'));
