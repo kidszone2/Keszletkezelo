@@ -28,16 +28,16 @@
 					<desktopModule>
 						<moduleName>RF Hero</moduleName>
 						<foldername>RF.Modules.UIElements</foldername>
-						<businessControllerClass>RF.Modules.UIElements.RF.Modules.UIElements.Components.FeatureController</businessControllerClass>
+						<businessControllerClass>RF.Modules.UIElements.Components.FeatureController</businessControllerClass>
 						<supportedFeatures />
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>UIElenents - Hero Item</friendlyName>
+								<friendlyName>RF Hero</friendlyName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
-										<controlKey>Hero</controlKey>
-										<controlSrc>RF.Modules.UIElements.RF.Modules.UIElements.Controllers/Hero/Index.mvc</controlSrc>
+										<controlKey />
+										<controlSrc>RF.Modules.UIElements.Controllers/Hero/Index.mvc</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
 										<controlType>View</controlType>
@@ -47,7 +47,7 @@
 									</moduleControl>
 									<moduleControl>
 										<controlKey>Settings</controlKey>
-										<controlSrc>RF.Modules.UIElements.RF.Modules.UIElements.Controllers/Settings/Hero.mvc</controlSrc>
+										<controlSrc>RF.Modules.UIElements.Controllers/Settings/Hero.mvc</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle>UIElements - Hero Settings</controlTitle>
 										<controlType>Edit</controlType>

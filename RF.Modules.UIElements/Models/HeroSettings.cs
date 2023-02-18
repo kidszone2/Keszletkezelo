@@ -12,9 +12,9 @@
 
 using DotNetNuke.Collections;
 using DotNetNuke.UI.Modules;
-using RF.Modules.UIElements.RF.Modules.UIElements.Util;
+using RF.Modules.UIElements.Util;
 
-namespace RF.Modules.UIElements.RF.Modules.UIElements.Models
+namespace RF.Modules.UIElements.Models
 {
     public class HeroSettings : SettingsModel
     {
@@ -23,6 +23,7 @@ namespace RF.Modules.UIElements.RF.Modules.UIElements.Models
             var result = new HeroSettings();
             result.ImagePath = context.Configuration.ModuleSettings.GetValueOrDefault(result.GetKey(s => s.ImagePath), string.Empty);
             result.Title = context.Configuration.ModuleSettings.GetValueOrDefault(result.GetKey(s => s.Title), string.Empty);
+            result.TitleColor = context.Configuration.ModuleSettings.GetValueOrDefault(result.GetKey(s => s.TitleColor), "#ffffff");
 
             return result;
         }
@@ -31,10 +32,13 @@ namespace RF.Modules.UIElements.RF.Modules.UIElements.Models
 
         public string Title { get; set; }
 
+        public string TitleColor { get; set; }
+
         public void UpdateContext(ModuleInstanceContext context)
         {
             context.Configuration.ModuleSettings[this.GetKey(s => s.ImagePath)] = ImagePath;
             context.Configuration.ModuleSettings[this.GetKey(s => s.Title)] = Title;
+            context.Configuration.ModuleSettings[this.GetKey(s => s.TitleColor)] = TitleColor;
         }
     }
 }

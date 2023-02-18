@@ -15,7 +15,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Search;
 using System.Collections.Generic;
 
-namespace RF.Modules.UIElements.RF.Modules.UIElements.Components
+namespace RF.Modules.UIElements.Components
 {
     /// -----------------------------------------------------------------------------
     /// <summary>

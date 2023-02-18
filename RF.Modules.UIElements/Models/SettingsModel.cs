@@ -10,7 +10,7 @@
 '
 */
 
-namespace RF.Modules.UIElements.RF.Modules.UIElements.Models
+namespace RF.Modules.UIElements.Models
 {
     public abstract class SettingsModel
     {

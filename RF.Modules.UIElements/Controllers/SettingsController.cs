@@ -13,10 +13,11 @@
 using DotNetNuke.Security;
 using DotNetNuke.Web.Mvc.Framework.ActionFilters;
 using DotNetNuke.Web.Mvc.Framework.Controllers;
-using RF.Modules.UIElements.RF.Modules.UIElements.Models;
+using RF.Modules.UIElements.Models;
+using System.Diagnostics;
 using System.Web.Mvc;
 
-namespace RF.Modules.UIElements.RF.Modules.UIElements.Controllers
+namespace RF.Modules.UIElements.Controllers
 {
     [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
     [DnnHandleError]

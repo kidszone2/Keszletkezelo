@@ -1,0 +1,27 @@
+
+
+.rf-uielements-hero {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+}
+.rf-uielements-hero .title-bar {
+  position: relative;
+  top: 45vh;
+  width: 100vw;
+}
+.rf-uielements-hero .title-bar h1 {
+  position: relative;
+  margin-left: 80px;
+  font-size: 66pt;
+  margin-bottom: 22pt;
+}
+.rf-uielements-hero .title-bar .bar {
+  font-size: 66pt;
+  position: relative;
+  width: 100vw;
+}
+.rf-uielements-hero .title-bar .bar rect {
+  fill: #ED7D31;
+}
