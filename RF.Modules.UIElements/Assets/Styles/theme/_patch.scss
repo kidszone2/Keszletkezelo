@@ -9,8 +9,19 @@
  *
  *****************************************************************************/
 
-@import "theme/font";
-@import "theme/variables";
+ @import "theme/font";
+ @import "theme/variables";
 
-@import "theme/legacy";
-@import "theme/patch";
+ .nav-item {
+     .dropdown-item {
+        color: $cl-normal !important;
+
+        &:visited, &:focus {
+            color: $cl-normal !important;
+        }
+
+        &:hover {
+            color: white !important;
+        }
+     }
+ }
