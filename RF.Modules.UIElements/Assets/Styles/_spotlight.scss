@@ -13,23 +13,22 @@ $detail-font-size: 14pt;
 $cl-spotlight-foreground: white;
 $cl-spotlight-background: black;
 
-$vertical-spacing: 45px;
+$vertical-spacing: 80px;
 
 .rf-uielements-spotlight {
     position: relative;
-    top: $content-offset;
-    left: 0;
-    margin: 0;
+    margin: 0 -15px;
     padding: 0;
     display: block;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background-size: cover;
-    margin-bottom: $content-offset;
+    overflow: hidden;
 
     .content {
         position: relative;
         width: 100vw;
+        overflow: hidden;
 
         &.top {
             top: 0;

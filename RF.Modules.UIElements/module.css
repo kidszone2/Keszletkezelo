@@ -7,15 +7,17 @@
   margin: 0;
   padding: 0;
   display: block;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-size: cover;
   margin-bottom: -102px;
+  overflow: hidden;
 }
 .rf-uielements-hero .title-bar {
   position: relative;
   top: 60vh;
   width: 100vw;
+  overflow: hidden;
 }
 .rf-uielements-hero .title-bar h1 {
   position: relative;
@@ -36,28 +38,27 @@
 
 .rf-uielements-spotlight {
   position: relative;
-  top: -102px;
-  left: 0;
-  margin: 0;
+  margin: 0 -15px;
   padding: 0;
   display: block;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-size: cover;
-  margin-bottom: -102px;
+  overflow: hidden;
 }
 .rf-uielements-spotlight .content {
   position: relative;
   width: 100vw;
+  overflow: hidden;
 }
 .rf-uielements-spotlight .content.top {
   top: 0;
-  margin-top: 45px;
+  margin-top: 80px;
 }
 .rf-uielements-spotlight .content.bottom {
   position: absolute;
   bottom: 0;
-  margin-bottom: 45px;
+  margin-bottom: 80px;
 }
 .rf-uielements-spotlight .content.left {
   margin-left: 80px;

@@ -23,6 +23,7 @@ $cl-link-header: white;
 body {
     background: $cl-background;
     color: $cl-foreground;
+    overflow-x: hidden;
 }
 
 .dnnbooster header .fixed-top {
