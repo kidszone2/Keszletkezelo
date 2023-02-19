@@ -62,14 +62,12 @@ namespace RF.Modules.UIElements.Controllers
             ViewBag.VerticalValues = new SelectList(new[]
             {
                 new SelectListItem() { Text = "Top", Value = "top"},
-                new SelectListItem() { Text = "Middle", Value = "middle"},
                 new SelectListItem() { Text = "Bottom", Value = "bottom"},
             }, nameof(SelectListItem.Value), nameof(SelectListItem.Text));
 
             ViewBag.HorizontalValues = new SelectList(new[]
             {
                 new SelectListItem() { Text = "Left", Value = "left"},
-                new SelectListItem() { Text = "Center", Value = "center"},
                 new SelectListItem() { Text = "Right", Value = "right"},
             }, nameof(SelectListItem.Value), nameof(SelectListItem.Text));
 
