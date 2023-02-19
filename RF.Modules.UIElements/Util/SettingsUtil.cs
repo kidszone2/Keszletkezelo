@@ -24,7 +24,7 @@ namespace RF.Modules.UIElements.Util
             where TModel : SettingsModel
         {
             var property = GetPropertyInfo(expression);
-            return $"RF.Modules.UIElements.{typeof(TModel).Name}_{property.Name}";
+            return $"RF.UIElements.{typeof(TModel).Name}_{property.Name}";
         }
     }
 }

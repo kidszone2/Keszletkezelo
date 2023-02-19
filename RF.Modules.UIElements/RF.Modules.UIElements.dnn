@@ -120,7 +120,7 @@
 									</moduleControl>
 									<moduleControl>
 										<controlKey>Settings</controlKey>
-										<controlSrc>RF.Modules.UIElements.Controllers/Settings/Hero.mvc</controlSrc>
+										<controlSrc>RF.Modules.UIElements.Controllers/Settings/Spotlight.mvc</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle>UIElements - Hero Settings</controlTitle>
 										<controlType>Edit</controlType>

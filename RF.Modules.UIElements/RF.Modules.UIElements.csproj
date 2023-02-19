@@ -109,7 +109,13 @@
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Models\HeroSettings.cs" />
     <Compile Include="Models\SettingsModel.cs" />
+    <Compile Include="Models\SpotlightSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Util\SettingsUtil.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +139,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -149,6 +159,7 @@
     <Content Include="Views\Hero\Index.cshtml" />
     <Content Include="Views\Settings\Hero.cshtml" />
     <Content Include="Views\Spotlight\Index.cshtml" />
+    <Content Include="Views\Settings\Spotlight.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

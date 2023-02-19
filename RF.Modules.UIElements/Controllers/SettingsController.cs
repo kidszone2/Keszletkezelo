@@ -49,5 +49,46 @@ namespace RF.Modules.UIElements.Controllers
 
             return RedirectToDefaultRoute();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Spotlight()
+        {
+            var settings = SpotlightSettings.Fetch(ModuleContext);
+
+            ViewBag.VerticalValues = new SelectList(new[]
+            {
+                new SelectListItem() { Text = "Top", Value = "top"},
+                new SelectListItem() { Text = "Middle", Value = "middle"},
+                new SelectListItem() { Text = "Bottom", Value = "bottom"},
+            }, nameof(SelectListItem.Value), nameof(SelectListItem.Text));
+
+            ViewBag.HorizontalValues = new SelectList(new[]
+            {
+                new SelectListItem() { Text = "Left", Value = "left"},
+                new SelectListItem() { Text = "Center", Value = "center"},
+                new SelectListItem() { Text = "Right", Value = "right"},
+            }, nameof(SelectListItem.Value), nameof(SelectListItem.Text));
+
+            return View(settings);
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="supportsTokens"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateInput(false)]
+        [DotNetNuke.Web.Mvc.Framework.ActionFilters.ValidateAntiForgeryToken]
+        public ActionResult Spotlight(SpotlightSettings settings)
+        {
+            settings?.UpdateContext(ModuleContext);
+
+            return RedirectToDefaultRoute();
+        }
     }
 }

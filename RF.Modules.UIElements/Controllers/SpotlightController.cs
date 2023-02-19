@@ -9,6 +9,6 @@ namespace RF.Modules.UIElements.Controllers
     public class SpotlightController : DnnController
     {
         public ActionResult Index()
-            => View(HeroSettings.Fetch(ModuleContext));
+            => View(SpotlightSettings.Fetch(ModuleContext));
     }
 }
