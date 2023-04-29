@@ -26,8 +26,8 @@ namespace Hotcakes_orders
 
         private void createOrderButton_Click(object sender, EventArgs e)
         {
-            string url = "http://www.dnndev.me";
-            string key = "1-04ef5d8f-9490-4c54-b45a-a449865431cf";
+            string url = "http://20.234.113.211:8090/";
+            string key = "1-903011f5-696d-4ed0-9cf8-3a6fa51607f2";
 
             Api proxy = new Api(url, key);
 
@@ -74,8 +74,8 @@ namespace Hotcakes_orders
 
         private void deleteOrderButton_Click(object sender, EventArgs e)
         {
-            string url = "http://www.dnndev.me";
-            string key = "1-04ef5d8f-9490-4c54-b45a-a449865431cf";
+            string url = "http://20.234.113.211:8090/";
+            string key = "1-903011f5-696d-4ed0-9cf8-3a6fa51607f2";
 
             Api proxy = new Api(url, key);
 
@@ -93,8 +93,8 @@ namespace Hotcakes_orders
 
         public void GetOrders()
         {
-            string url = "http://www.dnndev.me";
-            string key = "1-04ef5d8f-9490-4c54-b45a-a449865431cf";
+            string url = "http://20.234.113.211:8090/";
+            string key = "1-903011f5-696d-4ed0-9cf8-3a6fa51607f2";
 
             Api proxy = new Api(url, key);
 
