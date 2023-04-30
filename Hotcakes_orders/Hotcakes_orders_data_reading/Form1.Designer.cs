@@ -35,12 +35,16 @@
             // 
             // ordersDataGridView
             // 
+            this.ordersDataGridView.AllowUserToAddRows = false;
+            this.ordersDataGridView.AllowUserToDeleteRows = false;
+            this.ordersDataGridView.AllowUserToOrderColumns = true;
             this.ordersDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ordersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ordersDataGridView.Location = new System.Drawing.Point(24, 24);
             this.ordersDataGridView.Name = "ordersDataGridView";
+            this.ordersDataGridView.ReadOnly = true;
             this.ordersDataGridView.RowHeadersWidth = 51;
             this.ordersDataGridView.RowTemplate.Height = 24;
             this.ordersDataGridView.Size = new System.Drawing.Size(704, 329);
@@ -61,6 +65,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(754, 469);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.ordersDataGridView);

@@ -25,10 +25,45 @@ namespace Hotcakes_orders_data_reading
         public Form1()
         {
             InitializeComponent();
-            GetOrders();
+            GetProducts();
+            GetCategories();
         }
 
-        public void GetOrders()
+        private void GetCategories()
+        {
+            var categories = new List<string>();
+
+            string url = "http://20.234.113.211:8090/";
+            string key = "1-903011f5-696d-4ed0-9cf8-3a6fa51607f2";
+
+            Api proxy = new Api(url, key);
+
+            //az össze kategória lekérése
+            ApiResponse<List<CategorySnapshotDTO>> response = proxy.CategoriesFindAll();
+            string json = JsonConvert.SerializeObject(response);
+
+            ApiResponse<List<CategorySnapshotDTO>> deserializedResponse = JsonConvert.DeserializeObject<ApiResponse<List<CategorySnapshotDTO>>>(json);
+
+            foreach (CategorySnapshotDTO item in deserializedResponse.Content)
+            {
+
+                if (item.ParentId == "aa7af6a8-917e-4e69-8471-33205ded3897")
+                {
+                    categories.Add(item.Name);
+                }
+            }
+
+            for (int i = 0; i < categories.Count; i++)
+            {
+                Button button = new Button();
+                button.Text = categories[i];
+                button.Left = i * 100;
+                button.Width = 100;
+                Controls.Add(button);
+            }
+        }
+
+        public void GetProducts()
         {
             var bvin = new List<string>();
             var SKU = new List<string>();
@@ -40,7 +75,7 @@ namespace Hotcakes_orders_data_reading
 
             Api proxy = new Api(url, key);
 
-            // call the API to find all product in the store
+            //az össze termék lekérése
             ApiResponse<List<ProductDTO>> response = proxy.ProductsFindAll();
             string json = JsonConvert.SerializeObject(response);
 
@@ -53,7 +88,7 @@ namespace Hotcakes_orders_data_reading
                 product_name.Add(item.ProductName);
             }
 
-            //call the API to find all product in the store
+            //termékek darabszámának lekérése
             for (int i = 0; i < bvin.Count; i++)
             {
                 string aktBvin = bvin[i];
@@ -71,8 +106,8 @@ namespace Hotcakes_orders_data_reading
 
             DataTable dt = new DataTable();
             dt.Columns.Add("SKU", typeof(string));
-            dt.Columns.Add("Name", typeof(string));
-            dt.Columns.Add("Quantity", typeof(string));
+            dt.Columns.Add("Terméknév", typeof(string));
+            dt.Columns.Add("Mennyiség", typeof(string));
 
             for (int i = 0; i < bvin.Count; i++)
             {
