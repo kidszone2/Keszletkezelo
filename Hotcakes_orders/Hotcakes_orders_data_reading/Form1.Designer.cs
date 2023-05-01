@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.ordersDataGridView = new System.Windows.Forms.DataGridView();
-            this.startButton = new System.Windows.Forms.Button();
+            this.buttonPlus = new System.Windows.Forms.Button();
+            this.buttonMinus = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,39 +49,60 @@
             this.ordersDataGridView.ReadOnly = true;
             this.ordersDataGridView.RowHeadersWidth = 51;
             this.ordersDataGridView.RowTemplate.Height = 24;
-            this.ordersDataGridView.Size = new System.Drawing.Size(704, 329);
+            this.ordersDataGridView.Size = new System.Drawing.Size(644, 329);
             this.ordersDataGridView.TabIndex = 0;
             // 
-            // startButton
+            // buttonPlus
             // 
-            this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.startButton.Location = new System.Drawing.Point(24, 385);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(144, 48);
-            this.startButton.TabIndex = 1;
-            this.startButton.Text = "Start";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            this.buttonPlus.Location = new System.Drawing.Point(868, 117);
+            this.buttonPlus.Name = "buttonPlus";
+            this.buttonPlus.Size = new System.Drawing.Size(60, 59);
+            this.buttonPlus.TabIndex = 1;
+            this.buttonPlus.Text = "+";
+            this.buttonPlus.UseVisualStyleBackColor = true;
+            this.buttonPlus.Click += new System.EventHandler(this.buttonPlus_Click);
+            // 
+            // buttonMinus
+            // 
+            this.buttonMinus.Location = new System.Drawing.Point(868, 197);
+            this.buttonMinus.Name = "buttonMinus";
+            this.buttonMinus.Size = new System.Drawing.Size(60, 59);
+            this.buttonMinus.TabIndex = 2;
+            this.buttonMinus.Text = "-";
+            this.buttonMinus.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(714, 166);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(92, 50);
+            this.textBox1.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(754, 469);
-            this.Controls.Add(this.startButton);
+            this.ClientSize = new System.Drawing.Size(999, 469);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.buttonMinus);
+            this.Controls.Add(this.buttonPlus);
             this.Controls.Add(this.ordersDataGridView);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView ordersDataGridView;
-        private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.Button buttonPlus;
+        private System.Windows.Forms.Button buttonMinus;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
+using System.Runtime.Remoting.Proxies;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
@@ -22,17 +25,30 @@ namespace Hotcakes_orders_data_reading
 {
     public partial class Form1 : Form
     {
+        List<string> categories = new List<string>();
+        DataTable dt = new DataTable();
+        List<string> bvin = new List<string>();
+        List<int> quantity = new List<int>();
+        List<string> SKU = new List<string>();
+        List<string> product_name = new List<string>();
+
+
         public Form1()
         {
             InitializeComponent();
             GetProducts();
             GetCategories();
+            
+        }
+
+        private void AddProduct()
+        {
+           
+
         }
 
         private void GetCategories()
         {
-            var categories = new List<string>();
-
             string url = "http://20.234.113.211:8090/";
             string key = "1-903011f5-696d-4ed0-9cf8-3a6fa51607f2";
 
@@ -57,25 +73,28 @@ namespace Hotcakes_orders_data_reading
             {
                 Button button = new Button();
                 button.Text = categories[i];
-                button.Left = i * 100;
-                button.Width = 100;
+                Left = i * 100;
+                Width = 100;
+                button.Click += Button_Click;
+                
                 Controls.Add(button);
-            }
+
+            } 
+        }
+
+        private void Button_Click(object sender, EventArgs e)
+        {
+            
         }
 
         public void GetProducts()
         {
-            var bvin = new List<string>();
-            var SKU = new List<string>();
-            var product_name = new List<string>();
-            var quantity = new List<int>();
-
             string url = "http://20.234.113.211:8090/";
             string key = "1-903011f5-696d-4ed0-9cf8-3a6fa51607f2";
 
             Api proxy = new Api(url, key);
 
-            //az össze termék lekérése
+            //az összes termék lekérése
             ApiResponse<List<ProductDTO>> response = proxy.ProductsFindAll();
             string json = JsonConvert.SerializeObject(response);
 
@@ -103,25 +122,42 @@ namespace Hotcakes_orders_data_reading
                 }
             }
 
+            
 
-            DataTable dt = new DataTable();
             dt.Columns.Add("SKU", typeof(string));
             dt.Columns.Add("Terméknév", typeof(string));
-            dt.Columns.Add("Mennyiség", typeof(string));
+            dt.Columns.Add("Mennyiség", typeof(int));
+            
+            
 
             for (int i = 0; i < bvin.Count; i++)
             {
                 dt.Rows.Add(SKU[i], product_name[i], quantity[i]);
             }
-            
 
             ordersDataGridView.DataSource = dt;
-       
         }
 
-        private void startButton_Click(object sender, EventArgs e)
+        private void buttonPlus_Click(object sender, EventArgs e)
         {
-           
+            AddProduct();
+            int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
+
+            dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") + int.Parse(textBox1.Text));
+            MessageBox.Show(dt.Rows[rowIndex].Field<int>("Mennyiség").ToString());
+              
+
+
+            //foreach (var item in dt.AsEnumerable())
+            //{
+                
+            //    if (item.Field<string>("SKU") == SKU[rowIndex])
+            //    {
+            //        MessageBox.Show(item.Field<string>("Terméknév").ToString());
+            //        item.Field<int>("Mennyiség") = 5 ;
+            //    }
+
+            //}
         }
     }
 }
