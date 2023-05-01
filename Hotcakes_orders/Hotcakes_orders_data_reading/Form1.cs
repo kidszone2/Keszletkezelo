@@ -166,7 +166,7 @@ namespace Hotcakes_orders_data_reading
             {
                 dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") + int.Parse(textBox1.Text));
             }
-            //asdasdasdasdasdasd
+
             Saving();
         }
 
