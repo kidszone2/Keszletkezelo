@@ -18,7 +18,7 @@ namespace Hotcakes_orders_data_reading
 
         public void Button_Click(object sender, EventArgs e)
         {
-            
+            string cat = this.Text;
         }
     }
 }

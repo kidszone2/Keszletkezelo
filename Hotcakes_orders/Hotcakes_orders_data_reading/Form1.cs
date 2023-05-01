@@ -27,8 +27,9 @@ namespace Hotcakes_orders_data_reading
 {
     public partial class Form1 : Form
     {
-        List<string> categories = new List<string>();
+       
         DataTable dt = new DataTable();
+        List<string> category = new List<string>();
         List<string> bvin = new List<string>();
         List<int> quantity = new List<int>();
         List<string> SKU = new List<string>();
@@ -45,6 +46,7 @@ namespace Hotcakes_orders_data_reading
 
         private void GetCategories()
         {
+            List<string> categories = new List<string>();
             string url = "http://20.234.113.211:8090/";
             string key = "1-903011f5-696d-4ed0-9cf8-3a6fa51607f2";
 
@@ -58,7 +60,6 @@ namespace Hotcakes_orders_data_reading
 
             foreach (CategorySnapshotDTO item in deserializedResponse.Content)
             {
-
                 if (item.ParentId == "aa7af6a8-917e-4e69-8471-33205ded3897")
                 {
                     categories.Add(item.Name);
@@ -69,11 +70,26 @@ namespace Hotcakes_orders_data_reading
             {
                 Button button = new Button();
                 button.Text = categories[i];
-                Left = i * 100;
-                Width = 100;
-
+                button.Width = 100;
+                button.Left = i * 100;
+                button.Height = 50;
+                button.Click += Button_Click;
                 Controls.Add(button);
+            } 
+        }
+
+        private void Button_Click(object sender, EventArgs e)
+        {
+
+            DataTable table = new DataTable();
+            foreach (DataRow item in dt.Rows)
+            {
+                if (item.Field<string>("Kategória") == "Plüss")
+                {
+                    table.Rows.Add(item);
+                }
             }
+            ordersDataGridView.DataSource = table;
         }
 
         public void GetProducts()
@@ -111,13 +127,29 @@ namespace Hotcakes_orders_data_reading
                 }
             }
 
+            //termékek kategóriájának lekérése
+            for (int i = 0; i < bvin.Count; i++)
+            {
+                string aktBvin = bvin[i];
+                ApiResponse<List<CategorySnapshotDTO>> response_v3 = proxy.CategoriesFindForProduct(aktBvin);
+                string json_v3 = JsonConvert.SerializeObject(response_v3);
+
+                ApiResponse<List<CategorySnapshotDTO>> deserializedResponse_v3 = JsonConvert.DeserializeObject<ApiResponse<List<CategorySnapshotDTO>>>(json_v3);
+
+                foreach (CategorySnapshotDTO item in deserializedResponse_v3.Content)
+                {
+                    category.Add(item.Name);
+                }
+            }
+
             dt.Columns.Add("SKU", typeof(string));
             dt.Columns.Add("Terméknév", typeof(string));
             dt.Columns.Add("Mennyiség", typeof(int));
+            dt.Columns.Add("Kategória", typeof(string));
 
             for (int i = 0; i < bvin.Count; i++)
             {
-                dt.Rows.Add(SKU[i], product_name[i], quantity[i]);
+                dt.Rows.Add(SKU[i], product_name[i], quantity[i], category[i]);
             }
 
             ordersDataGridView.DataSource = dt;
@@ -134,6 +166,8 @@ namespace Hotcakes_orders_data_reading
             {
                 dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") + int.Parse(textBox1.Text));
             }
+
+            Saving();
         }
 
         private void buttonMinus_Click(object sender, EventArgs e)
@@ -150,6 +184,23 @@ namespace Hotcakes_orders_data_reading
         }
         private void Saving()
         {
+            //List<ProductInventoryDTO> inventory = new List<ProductInventoryDTO>();
+
+            //for (int i = 0; i < dt.Rows.Count; i++)
+            //{ 
+            //    Product product = new Product();
+            //    product.SKU = dt.Rows[i]["SKU"].ToString();
+            //    product.Product_name = dt.Rows[i]["Terméknév"].ToString();
+            //    product.Quantity = int.Parse(dt.Rows[i]["Mennyiség"].ToString());
+            //    inventory.Add(product);
+            //}
+
+            //string url = "http://20.234.113.211:8090/";
+            //string key = "1-903011f5-696d-4ed0-9cf8-3a6fa51607f2";
+
+            //Api proxy = new Api(url, key);
+            //// call the API to create the new product inventory record
+            //ApiResponse<ProductInventoryDTO> response = proxy.ProductInventoryUpdate(inventory);
 
         }
 
