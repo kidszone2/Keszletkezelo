@@ -81,15 +81,10 @@ namespace Hotcakes_orders_data_reading
         private void Button_Click(object sender, EventArgs e)
         {
 
-            DataTable table = new DataTable();
-            foreach (DataRow item in dt.Rows)
-            {
-                if (item.Field<string>("Kategória") == "Plüss")
-                {
-                    table.Rows.Add(item);
-                }
-            }
-            ordersDataGridView.DataSource = table;
+            DataTable tblFiltered = dt.AsEnumerable()
+                             .Where(r => r.Field<string>("Kategória") == ((Button)sender).Text)
+                             .CopyToDataTable();
+            ordersDataGridView.DataSource = tblFiltered;
         }
 
         public void GetProducts()
@@ -138,7 +133,11 @@ namespace Hotcakes_orders_data_reading
 
                 foreach (CategorySnapshotDTO item in deserializedResponse_v3.Content)
                 {
-                    category.Add(item.Name);
+                    
+                    if (!item.Name.Any(char.IsDigit) && !item.Name.Contains("Akciós termékek") && !item.Name.Contains("Újdonságok"))
+                    {
+                        category.Add(item.Name);
+                    }
                 }
             }
 
@@ -147,7 +146,7 @@ namespace Hotcakes_orders_data_reading
             dt.Columns.Add("Mennyiség", typeof(int));
             dt.Columns.Add("Kategória", typeof(string));
 
-            for (int i = 0; i < bvin.Count; i++)
+            for (int i = 0; i < bvin.Count -3 ; i++)
             {
                 dt.Rows.Add(SKU[i], product_name[i], quantity[i], category[i]);
             }
