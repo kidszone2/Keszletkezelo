@@ -41,12 +41,6 @@ namespace Hotcakes_orders_data_reading
             
         }
 
-        private void AddProduct()
-        {
-           
-
-        }
-
         private void GetCategories()
         {
             string url = "http://20.234.113.211:8090/";
@@ -75,16 +69,9 @@ namespace Hotcakes_orders_data_reading
                 button.Text = categories[i];
                 Left = i * 100;
                 Width = 100;
-                button.Click += Button_Click;
                 
                 Controls.Add(button);
-
             } 
-        }
-
-        private void Button_Click(object sender, EventArgs e)
-        {
-            
         }
 
         public void GetProducts()
@@ -122,13 +109,9 @@ namespace Hotcakes_orders_data_reading
                 }
             }
 
-            
-
             dt.Columns.Add("SKU", typeof(string));
             dt.Columns.Add("Terméknév", typeof(string));
             dt.Columns.Add("Mennyiség", typeof(int));
-            
-            
 
             for (int i = 0; i < bvin.Count; i++)
             {
@@ -140,28 +123,37 @@ namespace Hotcakes_orders_data_reading
 
         private void buttonPlus_Click(object sender, EventArgs e)
         {
-            AddProduct();
             int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
 
             dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") + int.Parse(textBox1.Text));
-            MessageBox.Show(dt.Rows[rowIndex].Field<int>("Mennyiség").ToString());
-              
+        }
 
+        private void textBox1_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(textBox1, "");
+        }
 
-            //foreach (var item in dt.AsEnumerable())
-            //{
-                
-            //    if (item.Field<string>("SKU") == SKU[rowIndex])
-            //    {
-            //        MessageBox.Show(item.Field<string>("Terméknév").ToString());
-            //        item.Field<int>("Mennyiség") = 5 ;
-            //    }
-
-            //}
+        private void textBox1_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBox1.Text))
+            {
+                errorProvider1.SetError(textBox1, "Az érték nem lehet üres");
+            }    
         }
     }
 }
 
+
+//foreach (var item in dt.AsEnumerable())
+//{
+
+//    if (item.Field<string>("SKU") == SKU[rowIndex])
+//    {
+//        MessageBox.Show(item.Field<string>("Terméknév").ToString());
+//        item.Field<int>("Mennyiség") = 5 ;
+//    }
+
+//}
 
 //namespace Hotcakes_orders_data_reading
 //{
