@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlTypes;
 using System.Drawing;
@@ -19,6 +20,7 @@ using Hotcakes.CommerceDTO.v1.Client;
 using Hotcakes.CommerceDTO.v1.Contacts;
 using Hotcakes.CommerceDTO.v1.Orders;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 
 namespace Hotcakes_orders_data_reading
@@ -38,7 +40,7 @@ namespace Hotcakes_orders_data_reading
             InitializeComponent();
             GetProducts();
             GetCategories();
-            
+
         }
 
         private void GetCategories()
@@ -69,9 +71,9 @@ namespace Hotcakes_orders_data_reading
                 button.Text = categories[i];
                 Left = i * 100;
                 Width = 100;
-                
+
                 Controls.Add(button);
-            } 
+            }
         }
 
         public void GetProducts()
@@ -124,22 +126,34 @@ namespace Hotcakes_orders_data_reading
         private void buttonPlus_Click(object sender, EventArgs e)
         {
             int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
-
-            dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") + int.Parse(textBox1.Text));
-        }
-
-        private void textBox1_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(textBox1, "");
-        }
-
-        private void textBox1_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(textBox1.Text))
+            if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
             {
-                errorProvider1.SetError(textBox1, "Az érték nem lehet üres");
-            }    
+                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
+            }
+            else
+            {
+                dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") + int.Parse(textBox1.Text));
+            }
         }
+
+        private void buttonMinus_Click(object sender, EventArgs e)
+        {
+            int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
+            if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
+            {
+                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
+            }
+            else
+            {
+                dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") - int.Parse(textBox1.Text));
+            }
+        }
+        private void Saving()
+        {
+
+        }
+
+        
     }
 }
 
