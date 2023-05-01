@@ -47,19 +47,23 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ordersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ordersDataGridView.Location = new System.Drawing.Point(21, 103);
+            this.ordersDataGridView.Location = new System.Drawing.Point(24, 129);
+            this.ordersDataGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ordersDataGridView.Name = "ordersDataGridView";
             this.ordersDataGridView.ReadOnly = true;
             this.ordersDataGridView.RowHeadersWidth = 51;
             this.ordersDataGridView.RowTemplate.Height = 24;
-            this.ordersDataGridView.Size = new System.Drawing.Size(644, 329);
+            this.ordersDataGridView.Size = new System.Drawing.Size(724, 411);
             this.ordersDataGridView.TabIndex = 0;
+            this.ordersDataGridView.SelectionChanged += new System.EventHandler(this.ordersDataGridView_SelectionChanged);
+            this.ordersDataGridView.BindingContextChanged += new System.EventHandler(this.ordersDataGridView_BindingContextChanged);
             // 
             // buttonPlus
             // 
-            this.buttonPlus.Location = new System.Drawing.Point(868, 117);
+            this.buttonPlus.Location = new System.Drawing.Point(976, 146);
+            this.buttonPlus.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonPlus.Name = "buttonPlus";
-            this.buttonPlus.Size = new System.Drawing.Size(60, 59);
+            this.buttonPlus.Size = new System.Drawing.Size(68, 74);
             this.buttonPlus.TabIndex = 1;
             this.buttonPlus.Text = "+";
             this.buttonPlus.UseVisualStyleBackColor = true;
@@ -67,9 +71,10 @@
             // 
             // buttonMinus
             // 
-            this.buttonMinus.Location = new System.Drawing.Point(868, 197);
+            this.buttonMinus.Location = new System.Drawing.Point(976, 246);
+            this.buttonMinus.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonMinus.Name = "buttonMinus";
-            this.buttonMinus.Size = new System.Drawing.Size(60, 59);
+            this.buttonMinus.Size = new System.Drawing.Size(68, 74);
             this.buttonMinus.TabIndex = 2;
             this.buttonMinus.Text = "-";
             this.buttonMinus.UseVisualStyleBackColor = true;
@@ -77,10 +82,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(714, 166);
+            this.textBox1.Location = new System.Drawing.Point(803, 208);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(92, 50);
+            this.textBox1.Size = new System.Drawing.Size(103, 62);
             this.textBox1.TabIndex = 3;
             // 
             // errorProvider1
@@ -89,14 +95,15 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(999, 469);
+            this.ClientSize = new System.Drawing.Size(1124, 586);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.buttonMinus);
             this.Controls.Add(this.buttonPlus);
             this.Controls.Add(this.ordersDataGridView);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).EndInit();
