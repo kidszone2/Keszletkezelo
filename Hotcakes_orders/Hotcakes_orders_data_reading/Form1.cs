@@ -42,13 +42,11 @@ namespace Hotcakes_orders_data_reading
 
         static Api proxy = new Api(url, key);
 
-        //az össze kategória lekérése
+        //az összes kategória lekérése
         static ApiResponse<List<CategorySnapshotDTO>> response = proxy.CategoriesFindAll();
         static string json = JsonConvert.SerializeObject(response);
 
         ApiResponse<List<CategorySnapshotDTO>> deserializedResponse = JsonConvert.DeserializeObject<ApiResponse<List<CategorySnapshotDTO>>>(json);
-
-
 
         //az összes termék lekérése
         static ApiResponse<List<ProductDTO>> productResponse = proxy.ProductsFindAll();
@@ -56,18 +54,19 @@ namespace Hotcakes_orders_data_reading
 
         ApiResponse<List<ProductDTO>> productDeserializedResponse = JsonConvert.DeserializeObject<ApiResponse<List<ProductDTO>>>(productJson);
 
-
         public Form1()
         {
             InitializeComponent();
             GetProducts();
             GetCategories();
+
+            this.WindowState = FormWindowState.Maximized;
+            panel1.Width = ordersDataGridView.Width;
+            
         }
 
         private void GetCategories()
         {
-            
-
             foreach (CategorySnapshotDTO item in deserializedResponse.Content)
             {
                 if (item.ParentId == "aa7af6a8-917e-4e69-8471-33205ded3897")
@@ -81,10 +80,10 @@ namespace Hotcakes_orders_data_reading
                 Button button = new Button();
                 button.Text = categories[i];
                 button.Width = 100;
-                button.Left = i * 100;
+                button.Left =  ClientRectangle.Size.Width/2;
                 button.Height = 50;
                 button.Click += Button_Click;
-                Controls.Add(button);
+                panel1.Controls.Add(button);
             } 
         }
 
