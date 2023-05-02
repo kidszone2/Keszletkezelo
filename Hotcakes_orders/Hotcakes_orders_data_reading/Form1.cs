@@ -42,13 +42,11 @@ namespace Hotcakes_orders_data_reading
 
         static Api proxy = new Api(url, key);
 
-        //az össze kategória lekérése
+        //az összes kategória lekérése
         static ApiResponse<List<CategorySnapshotDTO>> response = proxy.CategoriesFindAll();
         static string json = JsonConvert.SerializeObject(response);
 
         ApiResponse<List<CategorySnapshotDTO>> deserializedResponse = JsonConvert.DeserializeObject<ApiResponse<List<CategorySnapshotDTO>>>(json);
-
-
 
         //az összes termék lekérése
         static ApiResponse<List<ProductDTO>> productResponse = proxy.ProductsFindAll();
@@ -56,18 +54,18 @@ namespace Hotcakes_orders_data_reading
 
         ApiResponse<List<ProductDTO>> productDeserializedResponse = JsonConvert.DeserializeObject<ApiResponse<List<ProductDTO>>>(productJson);
 
-
         public Form1()
         {
             InitializeComponent();
             GetProducts();
             GetCategories();
+
+            this.WindowState = FormWindowState.Maximized;
+
         }
 
         private void GetCategories()
         {
-            
-
             foreach (CategorySnapshotDTO item in deserializedResponse.Content)
             {
                 if (item.ParentId == "aa7af6a8-917e-4e69-8471-33205ded3897")
@@ -80,12 +78,21 @@ namespace Hotcakes_orders_data_reading
             {
                 Button button = new Button();
                 button.Text = categories[i];
-                button.Width = 100;
-                button.Left = i * 100;
-                button.Height = 50;
+                button.Width = 105;
+                button.Left = i * 105;
+                //button.Left = i * 175 + panel1.Width/2 - i*75 - 150;
+                //button.Left = i * 100 + panel1.Width / 2 - i * 0 - 50;
+                //button.Left = (panel1.Width - (categories.Count * button.Width + (categories.Count - 1) * 10)) / 2 + i * (button.Width + 10);
+                button.Height = 80;
+                button.BackColor = Color.DarkCyan;
+                button.Font = new Font("Times New Roman", 11, FontStyle.Bold);
+                button.ForeColor = Color.White;
+                button.FlatStyle = FlatStyle.Flat; button.FlatAppearance.BorderColor = Color.White; button.FlatAppearance.BorderSize = 2;
+                button.Padding = new Padding(0, 0, 0, 0);   
                 button.Click += Button_Click;
-                Controls.Add(button);
-            } 
+                panel1.Controls.Add(button);
+            }
+
         }
 
         private void Button_Click(object sender, EventArgs e)
@@ -148,6 +155,7 @@ namespace Hotcakes_orders_data_reading
             dt.Columns.Add("Kategória", typeof(string));
             //dt.Columns.Add("Ár", typeof(int));
 
+
             for (int i = 0; i < bvin.Count -3 ; i++)
             {
                dt.Rows.Add(SKU[i], product_name[i], quantity[i], category[i]);
@@ -158,6 +166,7 @@ namespace Hotcakes_orders_data_reading
 
         private void buttonPlus_Click(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
             int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
             if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
             {
@@ -167,6 +176,7 @@ namespace Hotcakes_orders_data_reading
             {
                 dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") + int.Parse(textBox1.Text));
                 Saving_Quantity(dt.Rows[rowIndex].Field<string>("SKU"), dt.Rows[rowIndex].Field<int>("Mennyiség"));
+                textBox1.Text = null;
             }
         }
 
@@ -189,16 +199,23 @@ namespace Hotcakes_orders_data_reading
 
         private void buttonMinus_Click(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
             int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
-            if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
+            if (dt.Rows[rowIndex].Field<int>("Mennyiség") - int.Parse(textBox1.Text) > 0)
             {
-                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
+                if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
+                {
+                    errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
+                }
+                else
+                {
+                    dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") - int.Parse(textBox1.Text));
+                    Saving_Quantity(dt.Rows[rowIndex].Field<string>("SKU"), dt.Rows[rowIndex].Field<int>("Mennyiség"));
+                }
+                textBox1.Text = null;
             }
-            else
-            {
-                dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") - int.Parse(textBox1.Text));
-                Saving_Quantity(dt.Rows[rowIndex].Field<string>("SKU"), dt.Rows[rowIndex].Field<int>("Mennyiség"));
-            }
+
+            
         }
         private void Saving_Quantity(string Id, int quantity)
         {
@@ -239,5 +256,12 @@ namespace Hotcakes_orders_data_reading
         {
             ChangeStyleOfLackingProducts();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
