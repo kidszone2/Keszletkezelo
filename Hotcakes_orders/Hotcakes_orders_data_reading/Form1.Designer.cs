@@ -66,7 +66,7 @@
             this.ordersDataGridView.RowHeadersWidth = 51;
             this.ordersDataGridView.RowTemplate.Height = 24;
             this.ordersDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ordersDataGridView.Size = new System.Drawing.Size(675, 329);
+            this.ordersDataGridView.Size = new System.Drawing.Size(623, 329);
             this.ordersDataGridView.TabIndex = 0;
             this.ordersDataGridView.SelectionChanged += new System.EventHandler(this.ordersDataGridView_SelectionChanged);
             this.ordersDataGridView.BindingContextChanged += new System.EventHandler(this.ordersDataGridView_BindingContextChanged);
@@ -74,9 +74,10 @@
             // buttonPlus
             // 
             this.buttonPlus.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.buttonPlus.Location = new System.Drawing.Point(899, 195);
+            this.buttonPlus.Font = new System.Drawing.Font("Times New Roman", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonPlus.Location = new System.Drawing.Point(866, 128);
             this.buttonPlus.Name = "buttonPlus";
-            this.buttonPlus.Size = new System.Drawing.Size(60, 59);
+            this.buttonPlus.Size = new System.Drawing.Size(93, 107);
             this.buttonPlus.TabIndex = 1;
             this.buttonPlus.Text = "+";
             this.buttonPlus.UseVisualStyleBackColor = true;
@@ -85,9 +86,10 @@
             // buttonMinus
             // 
             this.buttonMinus.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.buttonMinus.Location = new System.Drawing.Point(899, 275);
+            this.buttonMinus.Font = new System.Drawing.Font("Times New Roman", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonMinus.Location = new System.Drawing.Point(866, 241);
             this.buttonMinus.Name = "buttonMinus";
-            this.buttonMinus.Size = new System.Drawing.Size(60, 59);
+            this.buttonMinus.Size = new System.Drawing.Size(93, 107);
             this.buttonMinus.TabIndex = 2;
             this.buttonMinus.Text = "-";
             this.buttonMinus.UseVisualStyleBackColor = true;
@@ -97,10 +99,10 @@
             // 
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.textBox1.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox1.Location = new System.Drawing.Point(792, 236);
+            this.textBox1.Location = new System.Drawing.Point(713, 198);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(92, 50);
+            this.textBox1.Size = new System.Drawing.Size(114, 82);
             this.textBox1.TabIndex = 3;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 

@@ -80,10 +80,12 @@ namespace Hotcakes_orders_data_reading
                 Button button = new Button();
                 button.Text = categories[i];
                 button.Width = 100;
-                button.Left =  ClientRectangle.Size.Width/2;
+                button.Left =  i* 120;
                 button.Height = 50;
+                button.BackColor = Color.LimeGreen;
                 button.Click += Button_Click;
                 panel1.Controls.Add(button);
+                
             } 
         }
 
@@ -189,15 +191,20 @@ namespace Hotcakes_orders_data_reading
         private void buttonMinus_Click(object sender, EventArgs e)
         {
             int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
-            if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
+            if (dt.Rows[rowIndex].Field<int>("Mennyiség") > 0)
             {
-                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
+                if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
+                {
+                    errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
+                }
+                else
+                {
+                    dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") - int.Parse(textBox1.Text));
+                    Saving_Quantity(dt.Rows[rowIndex].Field<string>("SKU"), dt.Rows[rowIndex].Field<int>("Mennyiség"));
+                }
             }
-            else
-            {
-                dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") - int.Parse(textBox1.Text));
-                Saving_Quantity(dt.Rows[rowIndex].Field<string>("SKU"), dt.Rows[rowIndex].Field<int>("Mennyiség"));
-            }
+
+            
         }
         private void Saving_Quantity(string Id, int quantity)
         {
