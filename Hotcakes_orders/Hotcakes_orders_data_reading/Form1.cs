@@ -159,6 +159,7 @@ namespace Hotcakes_orders_data_reading
 
         private void buttonPlus_Click(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
             int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
             if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
             {
@@ -168,6 +169,7 @@ namespace Hotcakes_orders_data_reading
             {
                 dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") + int.Parse(textBox1.Text));
                 Saving_Quantity(dt.Rows[rowIndex].Field<string>("SKU"), dt.Rows[rowIndex].Field<int>("Mennyiség"));
+                textBox1.Text = null;
             }
         }
 
@@ -190,6 +192,7 @@ namespace Hotcakes_orders_data_reading
 
         private void buttonMinus_Click(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
             int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
             if (dt.Rows[rowIndex].Field<int>("Mennyiség") > 0)
             {
@@ -202,6 +205,7 @@ namespace Hotcakes_orders_data_reading
                     dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") - int.Parse(textBox1.Text));
                     Saving_Quantity(dt.Rows[rowIndex].Field<string>("SKU"), dt.Rows[rowIndex].Field<int>("Mennyiség"));
                 }
+                textBox1.Text = null;
             }
 
             
