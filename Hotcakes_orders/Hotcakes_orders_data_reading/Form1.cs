@@ -61,8 +61,7 @@ namespace Hotcakes_orders_data_reading
             GetCategories();
 
             this.WindowState = FormWindowState.Maximized;
-            panel1.Width = ordersDataGridView.Width;
-            
+
         }
 
         private void GetCategories()
@@ -79,14 +78,21 @@ namespace Hotcakes_orders_data_reading
             {
                 Button button = new Button();
                 button.Text = categories[i];
-                button.Width = 100;
-                button.Left =  i* 120;
-                button.Height = 50;
-                button.BackColor = Color.LimeGreen;
+                button.Width = 105;
+                button.Left = i * 105;
+                //button.Left = i * 175 + panel1.Width/2 - i*75 - 150;
+                //button.Left = i * 100 + panel1.Width / 2 - i * 0 - 50;
+                //button.Left = (panel1.Width - (categories.Count * button.Width + (categories.Count - 1) * 10)) / 2 + i * (button.Width + 10);
+                button.Height = 80;
+                button.BackColor = Color.DarkCyan;
+                button.Font = new Font("Times New Roman", 11, FontStyle.Bold);
+                button.ForeColor = Color.White;
+                button.FlatStyle = FlatStyle.Flat; button.FlatAppearance.BorderColor = Color.White; button.FlatAppearance.BorderSize = 2;
+                button.Padding = new Padding(0, 0, 0, 0);   
                 button.Click += Button_Click;
                 panel1.Controls.Add(button);
-                
-            } 
+            }
+
         }
 
         private void Button_Click(object sender, EventArgs e)
@@ -149,6 +155,7 @@ namespace Hotcakes_orders_data_reading
             dt.Columns.Add("Kategória", typeof(string));
             //dt.Columns.Add("Ár", typeof(int));
 
+
             for (int i = 0; i < bvin.Count -3 ; i++)
             {
                dt.Rows.Add(SKU[i], product_name[i], quantity[i], category[i]);
@@ -194,7 +201,7 @@ namespace Hotcakes_orders_data_reading
         {
             errorProvider1.Clear();
             int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
-            if (dt.Rows[rowIndex].Field<int>("Mennyiség") > 0)
+            if (dt.Rows[rowIndex].Field<int>("Mennyiség") - int.Parse(textBox1.Text) > 0)
             {
                 if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
                 {
@@ -249,5 +256,12 @@ namespace Hotcakes_orders_data_reading
         {
             ChangeStyleOfLackingProducts();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
