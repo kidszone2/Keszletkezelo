@@ -190,6 +190,10 @@
             {
                 errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia!)");
             }
+            else if (int.Parse(textBox1.Text) < 1)
+            {
+                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres, egész számot kell tartalmaznia!)");
+            }
             else
             {
                 foreach (var item in products)
@@ -243,11 +247,15 @@
             errorProvider1.Clear();
             if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
             {
-                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres,számot kell tartalmaznia és a végeredménye a terméknek nem lehet negatív!)");
+                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres,egész számot kell tartalmaznia és a végeredménye a terméknek nem lehet negatív!)");
+            }
+            else if (int.Parse(textBox1.Text) < 1)
+            {
+                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres, egész számot kell tartalmaznia és a végeredménye a terméknek nem lehet negatív!)");
             }
             else if ((selected.Quantity - int.Parse(textBox1.Text)) < 0)
             {
-                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres,számot kell tartalmaznia és a végeredménye a terméknek nem lehet negatív!)");
+                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres, egész számot kell tartalmaznia és a végeredménye a terméknek nem lehet negatív!)");
             }
             else
             {
