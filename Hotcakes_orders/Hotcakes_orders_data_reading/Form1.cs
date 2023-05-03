@@ -196,7 +196,7 @@ namespace Hotcakes_orders_data_reading
             errorProvider1.Clear();
             if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
             {
-                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
+                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres,számot kell tartalmaznia és a végeredménye a terméknek nem lehet negatív!)");
             }
             else
             {
@@ -240,8 +240,20 @@ namespace Hotcakes_orders_data_reading
             int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
             int count = (int)ordersDataGridView.Rows[rowIndex].Cells[3].Value;
             string sku = (string)ordersDataGridView.Rows[rowIndex].Cells[0].Value;
+            Product selected = new Product();
+            foreach (var item in products)
+            {
+                if (item.SKU == sku)
+                {
+                    selected = item;
+                }
+            }
             errorProvider1.Clear();
             if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
+            {
+                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
+            }
+            else if ((selected.Quantity - int.Parse(textBox1.Text)) < 0)
             {
                 errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
             }
