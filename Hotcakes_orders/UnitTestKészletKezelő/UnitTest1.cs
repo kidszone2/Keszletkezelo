@@ -1,19 +1,14 @@
-using Hotcakes_orders_data_reading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-
 namespace UnitTestKészletKezelő
 {
+    using Hotcakes_orders_data_reading;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Forms;
+
     [TestClass]
     public class UnitTest1
     {
-        public void Button_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         [TestMethod]
         public void CreateButton_ShouldBeNormalButton()
         {
@@ -21,11 +16,7 @@ namespace UnitTestKészletKezelő
             Button result = Helpers.AddCategoryButton(2, "plüss", Button_Click, false);
             Assert.AreEqual(result.Left, 210);
             Assert.AreEqual(result.Text, "plüss");
-
         }
-
-
-
 
         [TestMethod]
         public void CreateButton_LastButtonTrue()
@@ -64,8 +55,6 @@ namespace UnitTestKészletKezelő
             Assert.AreEqual(orderedList[3].SKU, finalList[3].SKU);
         }
 
-
-
         [TestMethod]
         public void Filter_ShouldReturnFilteredList()
         {
@@ -92,9 +81,10 @@ namespace UnitTestKészletKezelő
             Assert.AreEqual(filteredList.Count, 2);
             Assert.AreEqual(filteredList[0].SKU, finalList[0].SKU);
             Assert.AreEqual(filteredList[1].SKU, finalList[1].SKU);
-            
         }
+        public void Button_Click(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }

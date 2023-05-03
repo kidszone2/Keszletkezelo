@@ -1,47 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlTypes;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Remoting.Contexts;
-using System.Runtime.Remoting.Proxies;
-using System.Security.Principal;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.XPath;
-using Hotcakes.CommerceDTO.v1;
-using Hotcakes.CommerceDTO.v1.Catalog;
-using Hotcakes.CommerceDTO.v1.Client;
-using Hotcakes.CommerceDTO.v1.Contacts;
-using Hotcakes.CommerceDTO.v1.Orders;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-
-namespace Hotcakes_orders_data_reading
+﻿namespace Hotcakes_orders_data_reading
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Linq;
+    using System.Windows.Forms;
+    using Hotcakes.CommerceDTO.v1;
+    using Hotcakes.CommerceDTO.v1.Catalog;
+    using Hotcakes.CommerceDTO.v1.Client;
+    using Newtonsoft.Json;
     public partial class Form1 : Form
     {
         #region Variables
 
-        DataTable dt = new DataTable();
         List<string> category = new List<string>();
-        List<decimal> prices = new List<decimal>();
         List<string> bvin = new List<string>();
         List<int> quantity = new List<int>();
         List<string> SKU = new List<string>();
         List<string> product_name = new List<string>();
         List<string> categories = new List<string>();
         List<Product> products = new List<Product>();
-        static string url = "http://20.234.113.211:8090/";
-        static string key = "1-903011f5-696d-4ed0-9cf8-3a6fa51607f2";
+        static readonly string url = "http://20.234.113.211:8090/";
+        static readonly string key = "1-903011f5-696d-4ed0-9cf8-3a6fa51607f2";
 
         static Api proxy = new Api(url, key);
 
@@ -66,14 +46,27 @@ namespace Hotcakes_orders_data_reading
             InitializeComponent();
             GetProducts();
             GetCategoryButtons();
+            InitializeWindowAndDataGrid();
+        }
+        #endregion
 
+        #region Methods and events
+
+        private void InitializeWindowAndDataGrid()
+        {
             this.WindowState = FormWindowState.Maximized;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
-        }
 
-        #endregion
-        
-        #region Methods and events
+            ordersDataGridView.Columns[0].HeaderText = "SKU Azonosító";
+            ordersDataGridView.Columns[2].HeaderText = "Termék neve";
+            ordersDataGridView.Columns[3].HeaderText = "Mennyiség raktáron";
+            ordersDataGridView.Columns[4].HeaderText = "Kategória";
+            ordersDataGridView.Columns[1].Visible = false;
+            foreach (DataGridViewColumn c in ordersDataGridView.Columns)
+            {
+                c.DefaultCellStyle.Font = new Font("Times New Roman", 24F, GraphicsUnit.Pixel);
+            }
+        }
 
         private void UpdateDatagrid(List<Product> lista)
         {
@@ -195,7 +188,7 @@ namespace Hotcakes_orders_data_reading
             errorProvider1.Clear();
             if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
             {
-                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres,számot kell tartalmaznia és a végeredménye a terméknek nem lehet negatív!)");
+                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia!)");
             }
             else
             {
@@ -250,11 +243,11 @@ namespace Hotcakes_orders_data_reading
             errorProvider1.Clear();
             if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
             {
-                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
+                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres,számot kell tartalmaznia és a végeredménye a terméknek nem lehet negatív!)");
             }
             else if ((selected.Quantity - int.Parse(textBox1.Text)) < 0)
             {
-                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
+                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres,számot kell tartalmaznia és a végeredménye a terméknek nem lehet negatív!)");
             }
             else
             {
