@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace Hotcakes_orders_data_reading
 {
-    public class Product: ProductInventoryDTO
+    public class Product
     {
         public string SKU { get; set; } 
+        public string Bvin { get; set; } 
         public string Product_name { get; set; }
         public int Quantity { get; set; }  
+        public string Category { get; set; }  
         
     }
 }
