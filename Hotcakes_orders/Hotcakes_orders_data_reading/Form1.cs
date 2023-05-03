@@ -72,10 +72,9 @@ namespace Hotcakes_orders_data_reading
         }
 
         #endregion
-
+        
         #region Methods and events
 
-        
         private void UpdateDatagrid(List<Product> lista)
         {
             var result = Helpers.OrderListByQuantity(lista);
@@ -235,7 +234,7 @@ namespace Hotcakes_orders_data_reading
             ordersDataGridView.Update();
         }
 
-        private void buttonMinus_Click(object sender, EventArgs e)
+       private void buttonMinus_Click(object sender, EventArgs e)
         {
             int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
             int count = (int)ordersDataGridView.Rows[rowIndex].Cells[3].Value;
@@ -277,6 +276,7 @@ namespace Hotcakes_orders_data_reading
                 textBox1.Text = null;
             }
         }
+       
         private bool Saving_Quantity(string Id, int quantity)
         {
             var result = productDeserializedResponse.Content.Find(x => x.Sku == Id);

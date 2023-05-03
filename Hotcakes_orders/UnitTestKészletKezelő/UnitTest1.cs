@@ -1,4 +1,4 @@
-﻿using Hotcakes_orders_data_reading;
+using Hotcakes_orders_data_reading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
