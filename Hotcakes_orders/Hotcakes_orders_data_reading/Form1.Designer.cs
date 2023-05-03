@@ -75,16 +75,17 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.ordersDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.ordersDataGridView.GridColor = System.Drawing.Color.Black;
-            this.ordersDataGridView.Location = new System.Drawing.Point(12, 128);
+            this.ordersDataGridView.Location = new System.Drawing.Point(14, 160);
+            this.ordersDataGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ordersDataGridView.MultiSelect = false;
             this.ordersDataGridView.Name = "ordersDataGridView";
             this.ordersDataGridView.ReadOnly = true;
             this.ordersDataGridView.RowHeadersVisible = false;
             this.ordersDataGridView.RowHeadersWidth = 51;
             this.ordersDataGridView.RowTemplate.Height = 24;
             this.ordersDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ordersDataGridView.Size = new System.Drawing.Size(615, 444);
+            this.ordersDataGridView.Size = new System.Drawing.Size(692, 555);
             this.ordersDataGridView.TabIndex = 0;
-            this.ordersDataGridView.SelectionChanged += new System.EventHandler(this.ordersDataGridView_SelectionChanged);
             this.ordersDataGridView.BindingContextChanged += new System.EventHandler(this.ordersDataGridView_BindingContextChanged);
             // 
             // buttonPlus
@@ -95,9 +96,10 @@
             this.buttonPlus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPlus.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonPlus.ForeColor = System.Drawing.Color.White;
-            this.buttonPlus.Location = new System.Drawing.Point(721, 462);
+            this.buttonPlus.Location = new System.Drawing.Point(811, 578);
+            this.buttonPlus.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonPlus.Name = "buttonPlus";
-            this.buttonPlus.Size = new System.Drawing.Size(330, 53);
+            this.buttonPlus.Size = new System.Drawing.Size(371, 66);
             this.buttonPlus.TabIndex = 1;
             this.buttonPlus.Text = "Hozzáadás";
             this.buttonPlus.UseVisualStyleBackColor = false;
@@ -111,9 +113,10 @@
             this.buttonMinus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMinus.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonMinus.ForeColor = System.Drawing.Color.White;
-            this.buttonMinus.Location = new System.Drawing.Point(721, 403);
+            this.buttonMinus.Location = new System.Drawing.Point(811, 504);
+            this.buttonMinus.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonMinus.Name = "buttonMinus";
-            this.buttonMinus.Size = new System.Drawing.Size(330, 53);
+            this.buttonMinus.Size = new System.Drawing.Size(371, 66);
             this.buttonMinus.TabIndex = 2;
             this.buttonMinus.Text = "Csökkentés";
             this.buttonMinus.UseVisualStyleBackColor = false;
@@ -123,10 +126,11 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox1.Location = new System.Drawing.Point(721, 344);
+            this.textBox1.Location = new System.Drawing.Point(811, 430);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(330, 53);
+            this.textBox1.Size = new System.Drawing.Size(371, 65);
             this.textBox1.TabIndex = 3;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -138,10 +142,10 @@
             // 
             this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(14, 15);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(615, 100);
+            this.panel1.Size = new System.Drawing.Size(692, 125);
             this.panel1.TabIndex = 4;
             // 
             // pictureBox1
@@ -151,29 +155,30 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(633, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(712, 15);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(480, 211);
+            this.pictureBox1.Size = new System.Drawing.Size(540, 263);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1125, 584);
+            this.ClientSize = new System.Drawing.Size(1266, 730);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.buttonMinus);
             this.Controls.Add(this.buttonPlus);
             this.Controls.Add(this.ordersDataGridView);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

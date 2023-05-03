@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes_orders", "Hotcakes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotcakes_orders_data_reading", "..\Hotcakes_orders_data_reading\Hotcakes_orders_data_reading.csproj", "{414C3517-FB1B-4A85-B87C-1A5964837ED6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestKészletKezelő", "..\UnitTestKészletKezelő\UnitTestKészletKezelő.csproj", "{4ED071A2-92ED-404B-AFDF-00296C25C365}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{414C3517-FB1B-4A85-B87C-1A5964837ED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{414C3517-FB1B-4A85-B87C-1A5964837ED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{414C3517-FB1B-4A85-B87C-1A5964837ED6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ED071A2-92ED-404B-AFDF-00296C25C365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ED071A2-92ED-404B-AFDF-00296C25C365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ED071A2-92ED-404B-AFDF-00296C25C365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ED071A2-92ED-404B-AFDF-00296C25C365}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

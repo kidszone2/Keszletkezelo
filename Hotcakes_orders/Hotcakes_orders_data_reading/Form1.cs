@@ -7,6 +7,7 @@ using System.Data.SqlTypes;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting.Contexts;
 using System.Runtime.Remoting.Proxies;
 using System.Security.Principal;
@@ -28,7 +29,8 @@ namespace Hotcakes_orders_data_reading
 {
     public partial class Form1 : Form
     {
-       
+        #region Variables
+
         DataTable dt = new DataTable();
         List<string> category = new List<string>();
         List<decimal> prices = new List<decimal>();
@@ -37,6 +39,7 @@ namespace Hotcakes_orders_data_reading
         List<string> SKU = new List<string>();
         List<string> product_name = new List<string>();
         List<string> categories = new List<string>();
+        List<Product> products = new List<Product>();
         static string url = "http://20.234.113.211:8090/";
         static string key = "1-903011f5-696d-4ed0-9cf8-3a6fa51607f2";
 
@@ -54,17 +57,33 @@ namespace Hotcakes_orders_data_reading
 
         ApiResponse<List<ProductDTO>> productDeserializedResponse = JsonConvert.DeserializeObject<ApiResponse<List<ProductDTO>>>(productJson);
 
+        #endregion
+
+        #region Constructor and destructor
+
         public Form1()
         {
             InitializeComponent();
             GetProducts();
-            GetCategories();
+            GetCategoryButtons();
 
             this.WindowState = FormWindowState.Maximized;
-
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
-        private void GetCategories()
+        #endregion
+
+        #region Methods and events
+
+        
+        private void UpdateDatagrid(List<Product> lista)
+        {
+            var result = Helpers.OrderListByQuantity(lista);
+            ordersDataGridView.DataSource = result;
+            ChangeStyleOfLackingProducts();
+        }
+
+        private void GetCategoryButtons()
         {
             foreach (CategorySnapshotDTO item in deserializedResponse.Content)
             {
@@ -73,46 +92,42 @@ namespace Hotcakes_orders_data_reading
                     categories.Add(item.Name);
                 }
             }
-
-            for (int i = 0; i < categories.Count; i++)
+            for (int i = 0; i <= categories.Count; i++)
             {
+                string category = "";
                 Button button = new Button();
-                button.Text = categories[i];
-                button.Width = 105;
-                button.Left = i * 105;
-                //button.Left = i * 175 + panel1.Width/2 - i*75 - 150;
-                //button.Left = i * 100 + panel1.Width / 2 - i * 0 - 50;
-                //button.Left = (panel1.Width - (categories.Count * button.Width + (categories.Count - 1) * 10)) / 2 + i * (button.Width + 10);
-                button.Height = 80;
-                button.BackColor = Color.DarkCyan;
-                button.Font = new Font("Times New Roman", 11, FontStyle.Bold);
-                button.ForeColor = Color.White;
-                button.FlatStyle = FlatStyle.Flat; button.FlatAppearance.BorderColor = Color.White; button.FlatAppearance.BorderSize = 2;
-                button.Padding = new Padding(0, 0, 0, 0);   
-                button.Click += Button_Click;
+                if (i != categories.Count)
+                { 
+                    category = categories[i];
+                }
+                button = Helpers.AddCategoryButton(i, category, Button_Click, i == categories.Count);
                 panel1.Controls.Add(button);
             }
-
         }
 
         private void Button_Click(object sender, EventArgs e)
         {
-
-            DataTable tblFiltered = dt.AsEnumerable()
-                             .Where(r => r.Field<string>("Kategória") == ((Button)sender).Text)
-                             .CopyToDataTable();
-            ordersDataGridView.DataSource = tblFiltered;
-            ChangeStyleOfLackingProducts();
+            if (((Button)sender).Text == "Minden kategória")
+            {
+                UpdateDatagrid(products);
+            }
+            else
+            {
+                var result = Helpers.Filter(products, ((Button)sender).Text);
+                UpdateDatagrid(result);
+            }
         }
 
         public void GetProducts()
         {
             foreach (ProductDTO item in productDeserializedResponse.Content)
             {
+                Product product = new Product() { SKU = item.Sku, Bvin = item.Bvin, Product_name = item.ProductName };
                 bvin.Add(item.Bvin);
                 SKU.Add(item.Sku);
                 product_name.Add(item.ProductName);
                 //prices.Add(item.SitePrice);
+                products.Add(product);
             }
 
             //termékek darabszámának lekérése
@@ -126,11 +141,34 @@ namespace Hotcakes_orders_data_reading
 
                 foreach (ProductInventoryDTO item in deserializedResponse_v2.Content)
                 {
+                    foreach (var product in products)
+                    {
+                        if (product.Bvin == item.ProductBvin)
+                        {
+                            product.Quantity = item.QuantityOnHand;
+                        }
+                    }
                     quantity.Add(item.QuantityOnHand);
                 }
             }
 
             //termékek kategóriájának lekérése
+            GetCategories();
+
+            for (int i = 0; i < category.Count; i++)
+            {
+                products[i].Category = category[i];
+            }
+
+            products.RemoveAt(products.Count-1);
+            products.RemoveAt(products.Count-1);
+
+            UpdateDatagrid(products);
+        }
+
+
+        public void GetCategories()
+        {
             for (int i = 0; i < bvin.Count; i++)
             {
                 string aktBvin = bvin[i];
@@ -141,50 +179,50 @@ namespace Hotcakes_orders_data_reading
 
                 foreach (CategorySnapshotDTO item in deserializedResponse_v3.Content)
                 {
-                    
+
                     if (!item.Name.Any(char.IsDigit) && !item.Name.Contains("Akciós termékek") && !item.Name.Contains("Újdonságok"))
                     {
                         category.Add(item.Name);
                     }
                 }
             }
-
-            dt.Columns.Add("SKU", typeof(string));
-            dt.Columns.Add("Terméknév", typeof(string));
-            dt.Columns.Add("Mennyiség", typeof(int));
-            dt.Columns.Add("Kategória", typeof(string));
-            //dt.Columns.Add("Ár", typeof(int));
-
-
-            for (int i = 0; i < bvin.Count -3 ; i++)
-            {
-               dt.Rows.Add(SKU[i], product_name[i], quantity[i], category[i]);
-            }
-
-            ordersDataGridView.DataSource = dt;
         }
 
         private void buttonPlus_Click(object sender, EventArgs e)
         {
-            errorProvider1.Clear();
             int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
+            int count = (int)ordersDataGridView.Rows[rowIndex].Cells[3].Value;
+            string sku = (string)ordersDataGridView.Rows[rowIndex].Cells[0].Value;
+            errorProvider1.Clear();
             if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
             {
                 errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
             }
             else
             {
-                dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") + int.Parse(textBox1.Text));
-                Saving_Quantity(dt.Rows[rowIndex].Field<string>("SKU"), dt.Rows[rowIndex].Field<int>("Mennyiség"));
+                foreach (var item in products)
+                {
+                    if (item.SKU == sku)
+                    {
+                        item.Quantity = count + int.Parse(textBox1.Text);
+                        if (Saving_Quantity(sku, count + int.Parse(textBox1.Text)))
+                        {
+                            MessageBox.Show("SIKERES MENTÉS!", "Rendszerüzenet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("SIKERTELEN MENTÉS!", "Rendszerüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
                 textBox1.Text = null;
             }
         }
 
         private void ChangeStyleOfLackingProducts()
         {
-            ordersDataGridView.Update();
             foreach (DataGridViewRow row in ordersDataGridView.Rows)
-                if (Convert.ToInt32(row.Cells[2].Value) == 0)
+                if (Convert.ToInt32(row.Cells[3].Value) == 0)
                 {
                     row.DefaultCellStyle.BackColor = Color.Red;
                     row.DefaultCellStyle.ForeColor = Color.White;
@@ -199,25 +237,35 @@ namespace Hotcakes_orders_data_reading
 
         private void buttonMinus_Click(object sender, EventArgs e)
         {
-            errorProvider1.Clear();
             int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
-            if (dt.Rows[rowIndex].Field<int>("Mennyiség") - int.Parse(textBox1.Text) > 0)
+            int count = (int)ordersDataGridView.Rows[rowIndex].Cells[3].Value;
+            string sku = (string)ordersDataGridView.Rows[rowIndex].Cells[0].Value;
+            errorProvider1.Clear();
+            if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
             {
-                if (string.IsNullOrEmpty(textBox1.Text) || !int.TryParse(textBox1.Text, out int result))
+                errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
+            }
+            else
+            {
+                foreach (var item in products)
                 {
-                    errorProvider1.SetError(textBox1, "NEM MEGFELELŐ ÉRTÉK! (A mező nem lehet üres és számot kell tartalmaznia)");
-                }
-                else
-                {
-                    dt.Rows[rowIndex].SetField("Mennyiség", dt.Rows[rowIndex].Field<int>("Mennyiség") - int.Parse(textBox1.Text));
-                    Saving_Quantity(dt.Rows[rowIndex].Field<string>("SKU"), dt.Rows[rowIndex].Field<int>("Mennyiség"));
+                    if (item.SKU == sku)
+                    {
+                        item.Quantity = count - int.Parse(textBox1.Text);
+                        if (Saving_Quantity(sku, count - int.Parse(textBox1.Text)))
+                        {
+                            MessageBox.Show("SIKERES MENTÉS!", "Rendszerüzenet", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("SIKERTELEN MENTÉS!", "Rendszerüzenet", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
                 }
                 textBox1.Text = null;
             }
-
-            
         }
-        private void Saving_Quantity(string Id, int quantity)
+        private bool Saving_Quantity(string Id, int quantity)
         {
             var result = productDeserializedResponse.Content.Find(x => x.Sku == Id);
             ApiResponse<List<ProductInventoryDTO>> response_v2 = proxy.ProductInventoryFindForProduct(result.Bvin);
@@ -227,29 +275,16 @@ namespace Hotcakes_orders_data_reading
             deserializedResponse_v2.Content.FirstOrDefault().QuantityOnHand = quantity;
 
             proxy.ProductInventoryUpdate(deserializedResponse_v2.Content.FirstOrDefault());
-            ChangeStyleOfLackingProducts();
-        }
-
-        
-
-        private void Saving_Prices(string Id, int new_price)
-        {
-            var result = productDeserializedResponse.Content.Find(x => x.Sku == Id);
-            result.SitePrice = new_price;
-            proxy.ProductsUpdate(result);
-        }
-        /*
-        private void armodositasButton_Click(object sender, EventArgs e)
-        {
-            int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
-            Saving_Prices(dt.Rows[rowIndex].Field<string>("SKU"), int.Parse(artextbox.Text));
-            dt.Rows[rowIndex].SetField("Ár", int.Parse(artextbox.Text));
-            
-        }
-        */
-        private void ordersDataGridView_SelectionChanged(object sender, EventArgs e)
-        {
-            int rowIndex = ordersDataGridView.CurrentCell.RowIndex;
+            try
+            {
+                UpdateDatagrid(products);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
         }
         
         private void ordersDataGridView_BindingContextChanged(object sender, EventArgs e)
@@ -257,11 +292,7 @@ namespace Hotcakes_orders_data_reading
             ChangeStyleOfLackingProducts();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
+        #endregion
 
-        }
-
-        
     }
 }
